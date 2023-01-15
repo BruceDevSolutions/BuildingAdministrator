@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\HomeController;
+use App\Http\Livewire\AnnouncementsIndex;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,6 +17,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', HomeController::class)->name('home');
+
+Route::get('annoucements', AnnouncementsIndex::class)->name('announcements.index');
 
 Route::middleware([
     'auth:sanctum',

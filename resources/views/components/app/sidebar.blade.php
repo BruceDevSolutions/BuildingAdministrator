@@ -1,21 +1,30 @@
 		<!-- Desktop sidebar -->
-		<aside class="z-20 flex-shrink-0 hidden w-64 overflow-y-auto bg-white dark:bg-gray-800 md:block">
+		<aside class="z-20 flex-shrink-0 hidden w-64 overflow-y-auto bg-white dark:bg-black md:block">
 			<div class="py-4 text-gray-500 dark:text-gray-400">
-				<a class="ml-6 text-lg font-bold text-gray-800 dark:text-gray-200" href="#">
-					Windmill
-				</a>
+
+				<livewire:application-logo />
+
 				<ul class="mt-6">
 					<li class="relative px-3 py-3">
-						<span class="absolute inset-y-0 left-0 w-1 rounded-tr-lg rounded-br-lg bg-primary-600" aria-hidden="true"></span>
-						<a class="inline-flex items-center w-full text-sm font-semibold text-gray-800 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-100" href="index.html">
+						<span class="{{request()->routeIs('home') ? 'absolute' : 'hidden'}}  inset-y-0 left-0 w-1 rounded-tr-lg rounded-br-lg bg-primary-600" aria-hidden="true"></span>
+						<a href="{{ route('home') }}" class="inline-flex items-center w-full text-sm font-semibold {{request()->routeIs('home') ? 'text-gray-800 dark:text-gray-100' : ''}}  transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
 							<svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
 								<path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
 							</svg>
-							<span class="ml-4">Dashboard</span>
+							<span class="ml-4">Inicio</span>
+						</a>
+					</li>
+					<li class="relative px-3 py-3">
+						<span class="{{request()->routeIs('announcements.*') ? 'absolute' : 'hidden'}}  inset-y-0 left-0 w-1 rounded-tr-lg rounded-br-lg bg-primary-600" aria-hidden="true"></span>
+						<a href="{{ route('announcements.index') }}" class="inline-flex items-center w-full text-sm font-semibold {{request()->routeIs('announcements.*') ? 'text-gray-800 dark:text-gray-100' : ''}}  transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
+							<svg class="w-5 h-5"  fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+								<path stroke-linecap="round" stroke-linejoin="round" d="M10.34 15.84c-.688-.06-1.386-.09-2.09-.09H7.5a4.5 4.5 0 110-9h.75c.704 0 1.402-.03 2.09-.09m0 9.18c.253.962.584 1.892.985 2.783.247.55.06 1.21-.463 1.511l-.657.38c-.551.318-1.26.117-1.527-.461a20.845 20.845 0 01-1.44-4.282m3.102.069a18.03 18.03 0 01-.59-4.59c0-1.586.205-3.124.59-4.59m0 9.18a23.848 23.848 0 018.835 2.535M10.34 6.66a23.847 23.847 0 008.835-2.535m0 0A23.74 23.74 0 0018.795 3m.38 1.125a23.91 23.91 0 011.014 5.395m-1.014 8.855c-.118.38-.245.754-.38 1.125m.38-1.125a23.91 23.91 0 001.014-5.395m0-3.46c.495.413.811 1.035.811 1.73 0 .695-.316 1.317-.811 1.73m0-3.46a24.347 24.347 0 010 3.46" />
+							</svg>
+							<span class="ml-4">Anuncios</span>
 						</a>
 					</li>
 				</ul>
-				<ul>
+{{-- 				<ul>
 					<li class="relative px-3 py-3">
 						<a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200" href="forms.html">
 							<svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
@@ -101,13 +110,13 @@
 							</ul>
 						</template>
 					</li>
-				</ul>
-				<div class="px-3 my-6">
+				</ul> --}}
+{{-- 				<div class="px-3 my-6">
 					<button class="flex items-center justify-between w-full px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 border border-transparent rounded-lg bg-primary-600 active:bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring">
 						Create account
 						<span class="ml-2" aria-hidden="true">+</span>
 					</button>
-				</div>
+				</div> --}}
 			</div>
 		</aside>
 		<!-- Mobile sidebar -->

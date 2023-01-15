@@ -5,7 +5,7 @@
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
 
-	<title>Windmill Dashboard</title>
+	<title>{{ $title }}</title>
 
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 	<link rel="stylesheet" href="{{ asset('/assets/css/tailwind.output.css') }}" />
@@ -20,7 +20,7 @@
 </head>
 
 <body>
-	<div class="flex h-screen bg-gray-50 dark:bg-gray-900" :class="{ 'overflow-hidden': isSideMenuOpen }">
+	<div class="flex h-screen bg-zinc-100 dark:bg-zinc-900" :class="{ 'overflow-hidden': isSideMenuOpen }">
         
         <x-app.sidebar />
         
@@ -29,7 +29,7 @@
             <x-app.header />
 
 			<main class="h-full overflow-y-auto">
-                <div class="container px-6 grid mx-auto">
+                <div class="container px-6 py-8 grid mx-auto ">
                     {{ $slot }}
                 </div>
 			</main>
