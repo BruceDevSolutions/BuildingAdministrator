@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\HomeController;
+use App\Http\Livewire\AnnouncementsCreateForm;
 use App\Http\Livewire\AnnouncementsIndex;
 use Illuminate\Support\Facades\Route;
 
@@ -18,7 +18,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', HomeController::class)->name('home');
 
-Route::get('annoucements', AnnouncementsIndex::class)->name('announcements.index');
+Route::get('announcements', AnnouncementsIndex::class)->name('announcements.index');
+Route::get('announcements/create', AnnouncementsCreateForm::class)->name('announcements.create');
 
 Route::middleware([
     'auth:sanctum',

@@ -14,8 +14,12 @@ class AnnouncementsIndex extends Component
 
     public function render()
     {
-        $announcements = Announcement::where('title','LIKE', '%'.$this->search.'%')->orWhere('announcement','LIKE', '%'.$this->search.'%')->paginate(1);
+        $announcements = Announcement::where('title','LIKE', '%'.$this->search.'%')->orWhere('announcement','LIKE', '%'.$this->search.'%')->orderBy('id', 'desc')->paginate(5);
         
         return view('livewire.announcements-index', compact('announcements'))->layoutData(['title' => 'Lista de anuncios']);
+    }
+
+    public function cleanPage(){
+        $this->resetPage();
     }
 }

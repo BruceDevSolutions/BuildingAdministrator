@@ -1,5 +1,11 @@
 <x-card>
 
+    <div class="flex justify-end">
+        <a href="{{ route('announcements.create') }}">
+            <x-button title="Nuevo" />
+        </a>
+    </div>
+
     <x-title title="Lista de anuncios"/>
     
     <x-paragraph class="mb-8">
@@ -12,7 +18,7 @@
                 <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path>
             </svg>
         </div>
-        <input wire:model="search" class="w-full pl-8 pr-2 text-sm text-gray-700 placeholder-gray-400 bg-gray-100 border-0 rounded-md dark:placeholder-gray-500 focus:ring-purple-500 dark:focus:placeholder-gray-600 dark:bg-zinc-700 dark:text-gray-200 focus:placeholder-gray-300 focus:bg-white focus:border-primary-300 focus:outline-none focus:ring form-input" type="text" placeholder="Buscar anuncio" aria-label="Search" />
+        <input wire:keydown="cleanPage" wire:model="search" class="w-full pl-8 pr-2 text-sm text-gray-700 placeholder-gray-400 bg-gray-100 border-0 rounded-md dark:placeholder-gray-500 focus:ring-purple-300 focus:ring-opacity-50 dark:focus:placeholder-gray-600 dark:bg-zinc-700 dark:text-gray-200 focus:placeholder-gray-300 focus:bg-white focus:border-primary-300 focus:outline-none focus:ring form-input" type="text" placeholder="Buscar anuncio" aria-label="Search" />
     </div>
 
     <div class="container grid mx-auto">
@@ -43,26 +49,30 @@
                                     {{ Str::limit($announcement->announcement, 150, '...')  }}
                                 </td>
                                 <td class="px-4 py-3 text-xs">
-                                    @if($announcement->status)
-                                        <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100">
-                                            Activo
-                                        </span>
-                                    @else
-                                        <span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-700">
-                                            Oculto
-                                        </span>
-                                    @endif
+                                    <div>
+                                        @if($announcement->status)
+                                            <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100">
+                                                Activo
+                                            </span>
+                                        @else
+                                            <span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-700">
+                                                Oculto
+                                            </span>
+                                        @endif
+                                    </div>
                                 </td>
                                 <td class="px-4 py-3 text-sm whitespace-nowrap text-center xl:whitespace-normal">
-                                    @if($announcement->pinned)
-                                        <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100">
-                                            Si
-                                        </span>
-                                    @else
-                                        <span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-700">
-                                            No
-                                        </span>
-                                    @endif
+                                   <div>
+                                        @if($announcement->pinned)
+                                            <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100">
+                                                Si
+                                            </span>
+                                        @else
+                                            <span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-700">
+                                                No
+                                            </span>
+                                        @endif
+                                   </div>
                                 </td>
                                 <td class="px-4 py-3 text-sm whitespace-nowrap">
                                     {{ $announcement->created_at }}
@@ -97,4 +107,6 @@
             </div>
         </div>
     </div>
+
+
 </x-card>
