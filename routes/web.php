@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\HomeController;
 use App\Http\Livewire\AnnouncementsCreateForm;
+use App\Http\Livewire\AnnouncementsEditForm;
 use App\Http\Livewire\AnnouncementsIndex;
 use Illuminate\Support\Facades\Route;
 
@@ -20,6 +21,7 @@ Route::get('/', HomeController::class)->name('home');
 
 Route::get('announcements', AnnouncementsIndex::class)->name('announcements.index');
 Route::get('announcements/create', AnnouncementsCreateForm::class)->name('announcements.create');
+Route::get('announcements/{announcement}/edit', AnnouncementsEditForm::class)->name('announcements.edit');
 
 Route::middleware([
     'auth:sanctum',

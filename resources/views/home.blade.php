@@ -27,7 +27,7 @@
                 </div>
 
                 <x-paragraph class="mt-4">
-                    {{ $announcement->announcement }}
+                    {{ $announcement->description }}
                 </x-paragraph>
 
                 <x-paragraph class="mt-4 flex justify-end">
@@ -45,7 +45,7 @@
                 {{ $announcement->title }}
             </x-title>
             <x-paragraph class="mt-4">
-                {{ $announcement->announcement }}
+                {{ $announcement->description }}
             </x-paragraph>
 
             <x-paragraph class="mt-4 flex justify-end">

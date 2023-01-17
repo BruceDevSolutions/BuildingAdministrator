@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('announcements', function (Blueprint $table) {
             $table->id();
-            $table->string('title', 60)->unique();
-            $table->text('announcement');
+            $table->string('title', 120)->unique();
+            $table->text('description');
             $table->boolean('status')->default(true);
             $table->boolean('pinned')->default(false);
             $table->timestamps();

@@ -10,11 +10,11 @@
         />
 
         <x-forms.textarea 
-            wire:model="announcement"
+            wire:model="description"
             label="Anuncio"
             rows="3"
             placeholder="Descripción del anuncio"
-            error-name="announcement"
+            error-name="description"
         />
         
         <x-forms.radio-button-field title="¿Mostrar en inicio?" class="mt-8 mb-4" wire:model="status" error-name="status">
@@ -33,6 +33,5 @@
             </x-button>
         </div>
     </form>
-</div>
 </x-card>
 

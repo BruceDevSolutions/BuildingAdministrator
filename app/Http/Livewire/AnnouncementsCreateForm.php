@@ -9,14 +9,15 @@ use Livewire\Component;
 class AnnouncementsCreateForm extends Component
 {
     public string $title;
-    public string $announcement;
+    public string $description;
     public bool $status;
     public bool $pinned;
 
-    protected function rules(){
+    protected function rules()
+    {
         return [
-            'title' => ['required', 'string', 'min:3', 'max:60', Rule::unique('announcements','title')],
-            'announcement' => ['required', 'string', 'min:10', 'max:1000'],
+            'title' => ['required', 'string', 'min:3', 'max:120', Rule::unique('announcements','title')],
+            'description' => ['required', 'string', 'min:10', 'max:1500'],
             'status' => ['required', 'boolean'],
             'pinned' => ['required', 'boolean'],
         ];
@@ -32,11 +33,14 @@ class AnnouncementsCreateForm extends Component
 
         Announcement::create($validatedData); 
 
+        $this->emit('notify-saved');
+
         return redirect()->route('announcements.index')->with('notify-saved', 'Anuncio creado satisfactoriamente.');
+
     }
 
     public function render()
     {
-        return view('livewire.announcements-create-form')->layoutData(['title' => 'Crear anuncio']);;
+        return view('livewire.announcements-create-form')->layoutData(['title' => 'Crear anuncio']);
     }
 }
