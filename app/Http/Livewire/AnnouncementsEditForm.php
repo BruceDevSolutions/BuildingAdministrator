@@ -35,6 +35,6 @@ class AnnouncementsEditForm extends Component
 
     public function render()
     {
-        return view('livewire.announcements-edit-form')->layoutData(['title' => 'Editar anuncio']);;
+        return view('livewire.announcements-edit-form')->layoutData(['title' => 'Editar anuncio']);
     }
 }

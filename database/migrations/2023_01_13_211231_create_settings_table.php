@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
-            $table->string('building_name', 100);
+            $table->string('building_name', 120);
             $table->string('address')->nullable();
             $table->integer('building_number')->nullable();
             $table->string('email',70)->nullable();
