@@ -60,6 +60,14 @@ function data() {
 		togglePagesMenu() {
 			this.isPagesMenuOpen = !this.isPagesMenuOpen
 		},
+		isPropertiesMenuOpen: false,
+		togglePropertiesMenu() {
+			this.isPropertiesMenuOpen = !this.isPropertiesMenuOpen
+		},
+		isAdministrationMenuOpen: false,
+		toggleAdministrationMenu() {
+			this.isAdministrationMenuOpen = !this.isAdministrationMenuOpen;
+		},
 		// Modal
 		isModalOpen: false,
 		trapCleanup: null,

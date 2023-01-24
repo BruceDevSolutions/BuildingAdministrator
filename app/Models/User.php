@@ -24,7 +24,10 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'first_name',
+        'last_name',
+        'ci',
+        'departament_id',
         'email',
         'password',
     ];
@@ -58,4 +61,8 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function phones(){
+        return $this->morphMany('App\Models\Phone', 'phoneable');
+    }
 }

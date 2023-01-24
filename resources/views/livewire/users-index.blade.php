@@ -1,18 +1,13 @@
 <x-card>
-
     <div class="flex justify-end">
-        <a href="{{ route('announcements.create') }}">
-            <x-button title="Nuevo" />
+        <a href="{{ route('admin.users.create') }}">
+            <x-button title="Registrar usuario" />
         </a>
     </div>
 
-    <x-title title="Lista de anuncios"/>
-    
-    <x-paragraph class="mb-8">
-        Los anuncios se mostrarán en página de Inicio. Desde este panel puedes configurarlos.
-    </x-paragraph>
+    <x-title class="mb-4" title="Lista de usuarios"/>
 
-    <x-searcher wire:keydown="cleanPage" wire:model="search"  placeholder="Buscar anuncio" />
+    <x-searcher wire:keydown="cleanPage" wire:model="search" placeholder="Buscar usuario"  />
 
     <div class="container grid mx-auto">
         <div class="w-full overflow-hidden rounded-lg ring-1 ring-black ring-opacity-5">
@@ -21,61 +16,38 @@
                     <thead>
                         <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-zinc-200 dark:text-gray-400 dark:bg-zinc-800">
                             <th class="px-4 py-3">Identificador</th>
-                            <th class="px-4 py-3">Título</th>
-                            <th class="px-4 py-3">Anuncio</th>
-                            <th class="px-4 py-3">Estado</th>
-                            <th class="px-4 py-3">Anclado</th>
-                            <th class="px-4 py-3">Fecha</th>
+                            <th class="px-4 py-3">Nombres</th>
+                            <th class="px-4 py-3">CI</th>
+                            <th class="px-4 py-3">Email</th>
+                            <th class="px-4 py-3">Contacto</th>
                             <th class="px-4 py-3">Acciones</th>
                         </tr>
                     </thead>
                     <tbody class="bg-zinc-100 divide-y dark:divide-gray-700 dark:bg-zinc-800">
-                        @forelse ($announcements as $announcement)
+                        @forelse ($users as $user)
                             <tr class="text-gray-700 dark:text-gray-400">
                                 <td class="px-4 py-3">
-                                    {{ $announcement->id }}
+                                    {{ $user->id }}
                                 </td>
                                 <td class="px-4 py-3 text-sm whitespace-nowrap">
-                                    {{ $announcement->title }}
+                                    {{ $user->first_name }} {{ $user->last_name }}
                                 </td>
                                 <td class="px-4 py-3 text-sm whitespace-nowrap xl:whitespace-normal">
-                                    {{ Str::limit($announcement->description, 150, '...')  }}
+                                    {{ $user->ci }}
                                 </td>
                                 <td class="px-4 py-3 text-xs">
-                                    <div>
-                                        @if($announcement->status)
-                                            <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100">
-                                                Activo
-                                            </span>
-                                        @else
-                                            <span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-700">
-                                                Oculto
-                                            </span>
-                                        @endif
-                                    </div>
+                                    {{ $user->email }}
                                 </td>
                                 <td class="px-4 py-3 text-sm whitespace-nowrap text-center xl:whitespace-normal">
-                                   <div>
-                                        @if($announcement->pinned)
-                                            <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100">
-                                                Si
-                                            </span>
-                                        @else
-                                            <span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-700">
-                                                No
-                                            </span>
-                                        @endif
-                                   </div>
+                                    77509679
                                 </td>
-                                <td class="px-4 py-3 text-sm whitespace-nowrap">
-                                    {{ $announcement->created_at }}
-                                </td>
+
                                 <td class="px-4 py-3">
                                     <div class="flex items-center space-x-4 text-sm">
-                                        <a href="{{ route('announcements.edit', $announcement) }}">
+                                        <a href="{{ route('admin.users.edit', $user) }}">
                                             <x-edit-button />
                                         </a>
-                                        <x-delete-button wire:click="confirmDeleteAnnouncement({{ $announcement->id }})" />
+                                        <x-delete-button wire:click="confirmDeleteAnnouncement({{ $user->id }})" />
                                     </div>
                                 </td>
                             </tr>
@@ -90,7 +62,7 @@
                 </table>
             </div>
             <div class=" px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-zinc-200 sm:grid-cols-9 dark:text-gray-400 dark:bg-zinc-800">
-                {{ $announcements->links() }}
+                {{ $users->links() }}
             </div>
         </div>
 
@@ -116,4 +88,5 @@
             </x-slot>
         </x-jet-dialog-modal> 
     </div>
+
 </x-card>

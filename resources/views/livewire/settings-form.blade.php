@@ -27,7 +27,7 @@
             />
 
             <x-forms.select label="Departamento" wire:model="departament_id">
-                <option selected disabled >--Selecciona un departamento--</option>
+                <option value="null" selected disabled >--Selecciona un departamento--</option>
                 @foreach ($departaments as $departament)
                     <option value="{{ $departament->id }}">{{ $departament->name }}</option>
                 @endforeach
@@ -55,8 +55,6 @@
                 type="file"
                 error-name="application_logo_path"
             />
-
-            
 
         </div>
         
