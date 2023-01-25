@@ -10,6 +10,7 @@ use App\Http\Livewire\PropertiesEditForm;
 use App\Http\Livewire\PropertiesCreateForm;
 use App\Http\Livewire\AnnouncementsEditForm;
 use App\Http\Livewire\AnnouncementsCreateForm;
+use App\Http\Livewire\UserEditForm;
 use App\Http\Livewire\UsersCreateForm;
 use App\Http\Livewire\UsersIndex;
 
@@ -28,7 +29,7 @@ Route::get('/', HomeController::class)->name('home');
 
 Route::get('/admin/users', UsersIndex::class)->name('admin.users.index');
 Route::get('/admin/users/create', UsersCreateForm::class)->name('admin.users.create');
-Route::get('/admin/users/{user}/edit', PropertiesEditForm::class)->name('admin.users.edit');
+Route::get('/admin/users/{user}/edit', UserEditForm::class)->name('admin.users.edit');
 
 Route::get('announcements', AnnouncementsIndex::class)->name('announcements.index');
 Route::get('announcements/create', AnnouncementsCreateForm::class)->name('announcements.create');

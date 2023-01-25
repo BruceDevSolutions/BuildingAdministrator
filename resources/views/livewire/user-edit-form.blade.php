@@ -1,5 +1,6 @@
 <x-card>
-    <x-title title="Registrar usuario" class="mb-4" />
+    <x-title title="Actualizar usuario" class="mb-4" />
+
     <form wire:submit.prevent='save'>
         <div class="flex flex-col space-y-4">
             <x-forms.input 
@@ -90,8 +91,9 @@
 
         <div class="mt-8 flex justify-end">
             <x-button>
-                Registrar
+                Actualizar
             </x-button>
         </div>
     </form>
+
 </x-card>

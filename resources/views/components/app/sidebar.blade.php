@@ -76,7 +76,7 @@
 									</a>
 								</li>
 								<li class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
-									<a  href="{{ route('announcements.create') }}" class="w-full">
+									<a  href="{{ route('admin.users.create') }}" class="w-full">
 										Registrar Usuario
 									</a>
 								</li>

@@ -38,8 +38,12 @@
                                 <td class="px-4 py-3 text-xs">
                                     {{ $user->email }}
                                 </td>
-                                <td class="px-4 py-3 text-sm whitespace-nowrap text-center xl:whitespace-normal">
-                                    77509679
+                                <td class="px-4 py-3 text-sm whitespace-nowrap xl:whitespace-normal">
+                                    @forelse ($user->phones as $phone)
+                                        {{ $phone->phone }}
+                                        @empty
+                                        --
+                                    @endforelse
                                 </td>
 
                                 <td class="px-4 py-3">
@@ -47,7 +51,7 @@
                                         <a href="{{ route('admin.users.edit', $user) }}">
                                             <x-edit-button />
                                         </a>
-                                        <x-delete-button wire:click="confirmDeleteAnnouncement({{ $user->id }})" />
+                                        <x-delete-button wire:click="confirmDeleteUser({{ $user->id }})" />
                                     </div>
                                 </td>
                             </tr>
@@ -66,15 +70,16 @@
             </div>
         </div>
 
+
         <x-notifications />
 
         <x-jet-dialog-modal wire:model="confirmDelete">
             <x-slot name="title">
-                Eliminar Anuncio
+                Eliminar Usuario
             </x-slot>
 
             <x-slot name="content">
-                ¿Estás seguro de eliminar este anuncio?
+                ¿Estás seguro de eliminar este usuario?
             </x-slot>
 
             <x-slot name="footer">
@@ -82,7 +87,7 @@
                     Cancelar
                 </x-secondary-button>
 
-                <x-button class="ml-3" wire:click="deleteAnnouncement()" wire:loading.attr="disabled">
+                <x-button class="ml-3" wire:click="deleteUser()" wire:loading.attr="disabled">
                     Eliminar 
                 </x-button>
             </x-slot>

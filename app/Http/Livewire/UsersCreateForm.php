@@ -7,6 +7,7 @@ use App\Models\Departament;
 use Illuminate\Validation\Rule;
 use App\Actions\Fortify\PasswordValidationRules;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class UsersCreateForm extends Component
 {
@@ -58,6 +59,7 @@ class UsersCreateForm extends Component
     public function save()
     {
         $validatedData = $this->validate();
+        $validatedData['password'] = Hash::make($this->password);
 
         $user = User::create($validatedData);
 
