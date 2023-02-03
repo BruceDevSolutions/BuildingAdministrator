@@ -80,6 +80,11 @@
 										Registrar Usuario
 									</a>
 								</li>
+								<li class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
+									<a  href="{{ route('admin.expenses.index') }}" class="w-full">
+										Gastos del edificio
+									</a>
+								</li>
 							</ul>
 						</template>
 					</li>
@@ -106,8 +111,18 @@
 									</a>
 								</li>
 								<li class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
-									<a  href="{{ route('announcements.create') }}" class="w-full">
-										Crear anuncio
+									<a  href="{{ route('properties.create') }}" class="w-full">
+										Registrar inmueble
+									</a>
+								</li>
+								<li class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
+									<a  href="{{ route('properties.fines.index') }}" class="w-full">
+										Multas
+									</a>
+								</li>
+								<li class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
+									<a  href="{{ route('properties.extraordinary-fees.index') }}" class="w-full">
+										Cuotas extraordinarias
 									</a>
 								</li>
 							</ul>

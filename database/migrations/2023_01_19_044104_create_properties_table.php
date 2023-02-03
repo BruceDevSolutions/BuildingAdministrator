@@ -21,6 +21,10 @@ return new class extends Migration
             $table->double('monthly_rate',6,2, true);
             $table->double('area',8,2, true)->nullable();
             $table->enum('property_type', [Property::DEPARTAMENTO, Property::LOCAL_COMERCIAL]);
+
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('set null')->onUpdate('cascade');
+
             $table->timestamps();
         });
     }

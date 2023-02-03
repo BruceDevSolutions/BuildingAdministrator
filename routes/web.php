@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\Property;
 use App\Http\Livewire\SettingsForm;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\PropertiesIndex;
@@ -10,6 +9,15 @@ use App\Http\Livewire\PropertiesEditForm;
 use App\Http\Livewire\PropertiesCreateForm;
 use App\Http\Livewire\AnnouncementsEditForm;
 use App\Http\Livewire\AnnouncementsCreateForm;
+use App\Http\Livewire\ExpenseCreateForm;
+use App\Http\Livewire\ExpenseShow;
+use App\Http\Livewire\ExpensesIndex;
+use App\Http\Livewire\ExtraordinaryFeesCreateForm;
+use App\Http\Livewire\ExtraordinaryFeesIndex;
+use App\Http\Livewire\FinesCreateForm;
+use App\Http\Livewire\FineShow;
+use App\Http\Livewire\FinesIndex;
+use App\Http\Livewire\PropertyShow;
 use App\Http\Livewire\UserEditForm;
 use App\Http\Livewire\UsersCreateForm;
 use App\Http\Livewire\UsersIndex;
@@ -35,9 +43,24 @@ Route::get('announcements', AnnouncementsIndex::class)->name('announcements.inde
 Route::get('announcements/create', AnnouncementsCreateForm::class)->name('announcements.create');
 Route::get('announcements/{announcement}/edit', AnnouncementsEditForm::class)->name('announcements.edit');
 
+Route::get('expenses', ExpensesIndex::class)->name('admin.expenses.index');
+Route::get('expenses/create', ExpenseCreateForm::class)->name('admin.expenses.create');
+Route::get('expenses/{expense}', ExpenseShow::class)->name('admin.expenses.show');
+
+/* inmuebles */
+Route::get('/properties/fines', FinesIndex::class)->name('properties.fines.index');
+Route::get('/properties/fines/create', FinesCreateForm::class)->name('properties.fines.create');
+Route::get('/properties/fines/{fine}', FineShow::class)->name('properties.fines.show');
+
+Route::get('/properties/extraordinary-fees', ExtraordinaryFeesIndex::class)->name('properties.extraordinary-fees.index');
+Route::get('/properties/extraordinary-fees/create', ExtraordinaryFeesCreateForm::class)->name('properties.extraordinary-fees.create');
+
+
 Route::get('/properties', PropertiesIndex::class)->name('properties.index');
 Route::get('/properties/create', PropertiesCreateForm::class)->name('properties.create');
 Route::get('/properties/{property}/edit', PropertiesEditForm::class)->name('properties.edit');
+Route::get('/properties/{property}', PropertyShow::class)->name('properties.show');
+
 
 Route::get('/settings', SettingsForm::class)->name('settings');
 

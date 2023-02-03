@@ -21,6 +21,7 @@ class PropertySeeder extends Seeder
             'monthly_rate' => 400.00,
             'area' => 130.00,
             'property_type' => 1,
+            'user_id' => 1,
         ]);
 
         Property::create([
@@ -29,6 +30,7 @@ class PropertySeeder extends Seeder
             'monthly_rate' => 400.00,
             'area' => 98.00,
             'property_type' => 1,
+            'user_id' => 1,
         ]);
 
         Property::create([
@@ -37,6 +39,7 @@ class PropertySeeder extends Seeder
             'monthly_rate' => 400.00,
             'area' => 130.00,
             'property_type' => 1,
+            'user_id' => 1,
         ]);
 
         Property::create([
@@ -44,6 +47,7 @@ class PropertySeeder extends Seeder
             'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi impedit eligendi, laboriosam pariatur officiis suscipit expedita voluptate atque cupiditate incidunt amet voluptatum. Quos, quasi commodi. Ducimus nihil sapiente quisquam alias.',
             'monthly_rate' => 400.00,
             'property_type' => 1,
+            'user_id' => 1,
         ]);
 
         Property::create([
@@ -51,6 +55,7 @@ class PropertySeeder extends Seeder
             'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi impedit eligendi, laboriosam pariatur officiis suscipit expedita voluptate atque cupiditate incidunt amet voluptatum. Quos, quasi commodi. Ducimus nihil sapiente quisquam alias.',
             'monthly_rate' => 400.00,
             'property_type' => 1,
+            'user_id' => 1,
         ]);
 
         Property::create([
@@ -58,6 +63,7 @@ class PropertySeeder extends Seeder
             'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi impedit eligendi, laboriosam pariatur officiis suscipit expedita voluptate atque cupiditate incidunt amet voluptatum. Quos, quasi commodi. Ducimus nihil sapiente quisquam alias.',
             'monthly_rate' => 400.00,
             'property_type' => 1,
+            'user_id' => 1,
         ]);
 
         Property::create([
@@ -65,6 +71,7 @@ class PropertySeeder extends Seeder
             'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi impedit eligendi, laboriosam pariatur officiis suscipit expedita voluptate atque cupiditate incidunt amet voluptatum. Quos, quasi commodi. Ducimus nihil sapiente quisquam alias.',
             'monthly_rate' => 400.00,
             'property_type' => 1,
+            'user_id' => 1,
         ]);
 
         Property::create([
@@ -72,6 +79,7 @@ class PropertySeeder extends Seeder
             'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi impedit eligendi, laboriosam pariatur officiis suscipit expedita voluptate atque cupiditate incidunt amet voluptatum. Quos, quasi commodi. Ducimus nihil sapiente quisquam alias.',
             'monthly_rate' => 400.00,
             'property_type' => 1,
+            'user_id' => 1,
         ]);
 
         Property::create([
@@ -79,6 +87,7 @@ class PropertySeeder extends Seeder
             'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi impedit eligendi, laboriosam pariatur officiis suscipit expedita voluptate atque cupiditate incidunt amet voluptatum. Quos, quasi commodi. Ducimus nihil sapiente quisquam alias.',
             'monthly_rate' => 400.00,
             'property_type' => 1,
+            'user_id' => 1,
         ]);
         
         Property::create([
@@ -86,6 +95,7 @@ class PropertySeeder extends Seeder
             'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi impedit eligendi, laboriosam pariatur officiis suscipit expedita voluptate atque cupiditate incidunt amet voluptatum. Quos, quasi commodi. Ducimus nihil sapiente quisquam alias.',
             'monthly_rate' => 500.00,
             'property_type' => 2,
+            'user_id' => 1,
         ]);
         
         Property::create([
@@ -94,6 +104,7 @@ class PropertySeeder extends Seeder
             'monthly_rate' => 500.00,
             'area' => 80.00,
             'property_type' => 2,
+            'user_id' => 1,
         ]);
         
         Property::create([
@@ -102,6 +113,7 @@ class PropertySeeder extends Seeder
             'monthly_rate' => 500.00,
             'area' => 68.00,
             'property_type' => 2,
+            'user_id' => 1,
         ]);
     }
 }

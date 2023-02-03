@@ -28,5 +28,8 @@ class DatabaseSeeder extends Seeder
         $this->call(UserSeeder::class);
         $this->call(AnnouncementSeeder::class);
         $this->call(PropertySeeder::class);
+        $this->call(FineSeeder::class);
+        $this->call(ExtraordinaryFeeSeeder::class);
+        $this->call(ExpenseSeeder::class);
     }
 }

@@ -2,8 +2,10 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\User;
 use Livewire\Component;
 use App\Models\Property;
+use Illuminate\Validation\Rule;
 
 class PropertiesCreateForm extends Component
 {
@@ -12,6 +14,7 @@ class PropertiesCreateForm extends Component
     public $monthly_rate;
     public $area;
     public $property_type = null;
+    public $user_id;
 
     protected function rules()
     {
@@ -20,7 +23,8 @@ class PropertiesCreateForm extends Component
             'description' => ['nullable','min:10','max:2500'],
             'monthly_rate' => ['required','max:6','regex:/^(([0-9]*)(\.([0-9]{0,2}+))?)$/',],
             'area' => ['required','max:8','regex:/^(([0-9]*)(\.([0-9]{0,2}+))?)$/',],
-            'property_type' => ['required', 'integer', 'digits_between:1,2']
+            'property_type' => ['required', 'integer', 'digits_between:1,2'],
+            'user_id' => ['required','integer', Rule::exists('users','id')]
         ];
     }
 
@@ -43,6 +47,8 @@ class PropertiesCreateForm extends Component
 
     public function render()
     {
-        return view('livewire.properties-create-form')->layoutData(['title' => 'Registrar inmueble']);
+        $users = User::all();
+        
+        return view('livewire.properties-create-form', compact('users'))->layoutData(['title' => 'Registrar inmueble']);
     }
 }

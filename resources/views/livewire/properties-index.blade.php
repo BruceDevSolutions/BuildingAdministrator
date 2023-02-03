@@ -7,14 +7,7 @@
 
     <x-title title="Lista de propiedades registradas" class="mb-4"/>
 
-    <div class="relative w-full focus-within:text-primary-500 mb-4">
-        <div class="absolute inset-y-0 flex items-center pl-2">
-            <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path>
-            </svg>
-        </div>
-        <input wire:keydown="cleanPage" wire:model="search" class="w-full pl-8 pr-2 text-sm text-gray-700 placeholder-gray-400 bg-gray-100 border-0 rounded-md dark:placeholder-gray-500 focus:ring-purple-300 focus:ring-opacity-50 dark:focus:placeholder-gray-600 dark:bg-zinc-700 dark:text-gray-200 focus:placeholder-gray-300 focus:bg-white focus:border-primary-300 focus:outline-none focus:ring form-input" type="text" placeholder="Buscar inmueble por identificador o código" aria-label="Search" />
-    </div>
+    <x-searcher wire:keydown="cleanPage" wire:model="search"  placeholder="Buscar inmueble por identificador o código"  />
 
     <div class="container grid mx-auto">
         <div class="w-full overflow-hidden rounded-lg ring-1 ring-black ring-opacity-5">
@@ -28,7 +21,7 @@
                             <th class="px-4 py-3">Residentes</th>
                             <th class="px-4 py-3">Cuota</th>
                             <th class="px-4 py-3">Tipo</th>
-                            <th class="px-4 py-3">Acciones</th>
+                            <th class="px-2 py-3 text-center w-min">Acciones</th>
                         </tr>
                     </thead>
                     <tbody class="bg-zinc-100 divide-y dark:divide-gray-700 dark:bg-zinc-800">
@@ -41,7 +34,9 @@
                                     {{ $property->code }}
                                 </td>
                                 <td class="px-4 py-3 text-sm whitespace-nowrap xl:whitespace-normal">
-                                    789494
+                                    @foreach ($property->user->phones as $phone)
+                                        <a href="{{'tel:+591'.$phone->phone }}">{{ $phone->phone }}</a>
+                                    @endforeach
                                 </td>
                                 <td class="px-4 py-3 text-xs">
                                     Residente de ejemplo
@@ -49,19 +44,22 @@
                                 <td class="px-4 py-3 text-xs">
                                     {{ $property->monthly_rate }}
                                 </td>
-                                <td class="px-4 py-3 text-sm whitespace-nowrap text-center xl:whitespace-normal">
+                                <td class="px-4 py-3 text-sm whitespace-nowrap xl:whitespace-normal">
                                         @if($property->property_type == 1)
                                                 Departamento
                                         @else
                                                 Local Comercial
                                         @endif
                                 </td>
-                                <td class="px-4 py-3">
-                                    <div class="flex items-center space-x-4 text-sm">
+                                <td class="px-2 py-3 w-min">
+                                    <div class="flex items-center justify-center space-x-4 text-sm">
                                         <a href="{{ route('properties.edit', $property) }}">
                                             <x-edit-button />
                                         </a>
                                         <x-delete-button wire:click="confirmDeleteProperty({{ $property->id }})" />
+                                        <a href="{{ route('properties.show', $property) }}">
+                                            <x-view-button />
+                                        </a>
                                     </div>
                                 </td>
                             </tr>
