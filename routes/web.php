@@ -17,6 +17,9 @@ use App\Http\Livewire\ExtraordinaryFeesIndex;
 use App\Http\Livewire\FinesCreateForm;
 use App\Http\Livewire\FineShow;
 use App\Http\Livewire\FinesIndex;
+use App\Http\Livewire\IncomeCreateForm;
+use App\Http\Livewire\IncomeShow;
+use App\Http\Livewire\IncomesIndex;
 use App\Http\Livewire\PropertyShow;
 use App\Http\Livewire\UserEditForm;
 use App\Http\Livewire\UsersCreateForm;
@@ -43,9 +46,14 @@ Route::get('announcements', AnnouncementsIndex::class)->name('announcements.inde
 Route::get('announcements/create', AnnouncementsCreateForm::class)->name('announcements.create');
 Route::get('announcements/{announcement}/edit', AnnouncementsEditForm::class)->name('announcements.edit');
 
-Route::get('expenses', ExpensesIndex::class)->name('admin.expenses.index');
-Route::get('expenses/create', ExpenseCreateForm::class)->name('admin.expenses.create');
-Route::get('expenses/{expense}', ExpenseShow::class)->name('admin.expenses.show');
+/* FINANZAS */
+Route::get('finances/expenses', ExpensesIndex::class)->name('finances.expenses.index');
+Route::get('finances/expenses/create', ExpenseCreateForm::class)->name('finances.expenses.create');
+Route::get('finances/expenses/{expense}', ExpenseShow::class)->name('finances.expenses.show');
+
+Route::get('finances/incomes', IncomesIndex::class)->name('finances.incomes.index');
+Route::get('finances/incomes/create', IncomeCreateForm::class)->name('finances.incomes.create');
+Route::get('finances/incomes/{expense}', IncomeShow::class)->name('finances.incomes.show');
 
 /* inmuebles */
 Route::get('/properties/fines', FinesIndex::class)->name('properties.fines.index');

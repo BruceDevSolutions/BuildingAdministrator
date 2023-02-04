@@ -68,6 +68,10 @@ function data() {
 		toggleAdministrationMenu() {
 			this.isAdministrationMenuOpen = !this.isAdministrationMenuOpen;
 		},
+		isFinancesMenuOpen: false,
+		toggleFinancesMenu() {
+			this.isFinancesMenuOpen = !this.isFinancesMenuOpen;
+		},
 		// Modal
 		isModalOpen: false,
 		trapCleanup: null,

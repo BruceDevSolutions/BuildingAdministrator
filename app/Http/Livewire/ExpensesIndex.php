@@ -24,9 +24,9 @@ class ExpensesIndex extends Component
 
         if($expense->date > now()->subMonth(1)){
 
-            Storage::disk('public')->delete($expense->vaucher_path);
-
-
+            if($expense->vaucher_path){
+                Storage::disk('public')->delete($expense->vaucher_path);
+            }
             $expense->delete();
 
             $this->reset(['confirmDelete']);
@@ -43,6 +43,7 @@ class ExpensesIndex extends Component
     public function render()
     {
         $expenses = Expense::where('date', 'LIKE', '%'.$this->search.'%')->orWhere('concept', 'LIKE', '%'.$this->search.'%')->orderBy('id','desc')->paginate(5);
+        
         return view('livewire.expenses-index', compact('expenses'))->layoutData(['title' => 'Gastos del inmueble']);
     }
 
