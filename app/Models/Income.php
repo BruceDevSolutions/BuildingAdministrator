@@ -14,9 +14,18 @@ class Income extends Model
     const EXPENSA = '3';
     const OTRO = '4';
 
+    protected $guarded = ['id','created_at','updated_at'];
+
+    /* Para encontrar la propiedad al que pertenece una multa */
     public function property_fine()
     {
-        return $this->belongsToMany(Property::class, 'income_fine_property');
+        return $this->belongsToMany(Property::class, 'income_fine_property')->withPivot(['fine_id']);
+    }
+
+    /* para encontrar una multa específica */
+    public function fine()
+    {
+        return $this->belongsToMany(Fine::class, 'income_fine_property');
     }
 
     public function property_extraordinary_fee()

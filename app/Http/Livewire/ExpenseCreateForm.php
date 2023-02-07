@@ -45,7 +45,7 @@ class ExpenseCreateForm extends Component
 
         Expense::create(array_filter($validatedData));
 
-        return redirect()->route('admin.expenses.index')->with('notify-saved', 'Registro creado satisfactoriamente.');
+        return redirect()->route('finances.expenses.index')->with('notify-saved', 'Registro creado satisfactoriamente.');
 
     }
 

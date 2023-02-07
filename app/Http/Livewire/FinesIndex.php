@@ -3,9 +3,11 @@
 namespace App\Http\Livewire;
 
 use App\Models\Fine;
+use App\Models\Income;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Auth;
 
 class FinesIndex extends Component
 {
@@ -48,6 +50,8 @@ class FinesIndex extends Component
                 $fine->update([
                     'status' => false
                 ]);
+
+                $fine->income()->delete();
             }else{
                 session()->flash('notify-danger', 'No puedes marcar como pendiente una multa con más de un mes de antiguedad.');
             }
@@ -55,6 +59,17 @@ class FinesIndex extends Component
             $fine->update([
                 'status' => true
             ]);
+
+            $income = Income::create([
+                'concept' => "Pago por: $fine->concept",
+                'details' => "Detalle heredado de multa: $fine->details",
+                'value' => $fine->value,
+                'date' => now(),
+                'type' => Income::MULTA,
+                'user_id' => Auth::user()->id,
+            ]);
+
+            $income->property_fine()->attach([$fine->property->id => ['fine_id' => $fine->id]]);
         }
 
         $this->reset(['changeStatus']);

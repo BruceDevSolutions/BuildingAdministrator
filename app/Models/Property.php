@@ -24,4 +24,14 @@ class Property extends Model
     {
         return $this->belongsToMany(ExtraordinaryFee::class,'extraordinary_fee_property');
     }
+
+    public function fines()
+    {
+        return $this->hasMany(Fine::class);
+    }
+
+    public function fines_pendant()
+    {
+        return $this->hasMany(Fine::class)->where('status', false);
+    }
 }

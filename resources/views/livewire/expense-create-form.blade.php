@@ -35,7 +35,7 @@
 
             <x-forms.input 
                 wire:model="vaucher_path"
-                label="Logo"
+                label="Comprobante"
                 type="file"
                 error-name="vaucher_path"
             />

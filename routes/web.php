@@ -53,7 +53,7 @@ Route::get('finances/expenses/{expense}', ExpenseShow::class)->name('finances.ex
 
 Route::get('finances/incomes', IncomesIndex::class)->name('finances.incomes.index');
 Route::get('finances/incomes/create', IncomeCreateForm::class)->name('finances.incomes.create');
-Route::get('finances/incomes/{expense}', IncomeShow::class)->name('finances.incomes.show');
+Route::get('finances/incomes/{income}', IncomeShow::class)->name('finances.incomes.show');
 
 /* inmuebles */
 Route::get('/properties/fines', FinesIndex::class)->name('properties.fines.index');

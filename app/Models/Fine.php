@@ -15,4 +15,9 @@ class Fine extends Model
     {
         return $this->belongsTo(Property::class);
     }
+
+    public function income()
+    {
+        return $this->belongsToMany(Income::class, 'income_fine_property');
+    }
 }

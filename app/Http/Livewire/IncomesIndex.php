@@ -29,6 +29,11 @@ class IncomesIndex extends Component
                 Storage::disk('public')->delete($income->vaucher_path);
             }
 
+            /* Para revertir la multa */
+            if($income->property_fine){
+                $income->fine()->update(['status' => false]);
+            }
+
             $income->delete();
 
             $this->reset(['confirmDelete']);

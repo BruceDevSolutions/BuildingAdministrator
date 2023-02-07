@@ -22,6 +22,9 @@ return new class extends Migration
             $table->unsignedBigInteger('property_id');
             $table->foreign('property_id')->references('id')->on('properties')->onUpdate('cascade')->onDelete('cascade');
 
+            $table->unsignedBigInteger('fine_id')->nullable();
+            $table->foreign('fine_id')->references('id')->on('fines')->onUpdate('cascade')->onDelete('cascade');
+
             $table->timestamps();
         });
     }
