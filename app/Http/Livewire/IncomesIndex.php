@@ -24,7 +24,7 @@ class IncomesIndex extends Component
     {
         $income = Income::findOrFail($this->confirmDelete);
 
-        if($income->date > now()->subMonth(1)){
+        if($income->created_at > now()->subMonth(1)){
 
             if($income->vaucher_path){
                 Storage::disk('public')->delete($income->vaucher_path);
@@ -50,7 +50,7 @@ class IncomesIndex extends Component
         }else{
             $this->reset(['confirmDelete']);
 
-            session()->flash('notify-danger', 'No puedes eliminar un registro con más de un mes de antiguedad.');
+            session()->flash('notify-danger', 'No puedes eliminar un registro con más de un mes de antiguedad desde su registro.');
         }
     }
 

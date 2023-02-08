@@ -34,6 +34,7 @@
                             <th class="px-4 py-3">Comprobante</th>
                             <th class="px-4 py-3">Tipo</th>
                             <th class="px-4 py-3">Fecha</th>
+                            <th class="px-4 py-3">Registro</th>
                             <th class="px-4 py-3">Acciones</th>
                         </tr>
                     </thead>
@@ -72,6 +73,9 @@
                             </td>
                             <td class="px-4 py-3 text-sm whitespace-nowrap">
                                 {{ $income->date }}
+                            </td>
+                            <td class="px-4 py-3 text-sm whitespace-nowrap">
+                                {{\Carbon\Carbon::parse($income->created_at)->isoFormat('Y-MM-DD')}}
                             </td>
                             <td class="px-4 py-3">
                                 <div class="flex items-center space-x-4 text-sm">

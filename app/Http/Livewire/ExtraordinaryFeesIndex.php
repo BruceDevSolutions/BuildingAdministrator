@@ -24,7 +24,7 @@ class ExtraordinaryFeesIndex extends Component
     {
         $fine = ExtraordinaryFee::findOrFail($this->confirmDelete);
 
-        if($fine->date > now()->subMonth(1)){
+        if($fine->created_at > now()->subMonth(1)){
 
             $fine->delete();
 

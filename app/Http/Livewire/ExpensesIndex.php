@@ -22,7 +22,7 @@ class ExpensesIndex extends Component
     {
         $expense = Expense::findOrFail($this->confirmDelete);
 
-        if($expense->date > now()->subMonth(1)){
+        if($expense->created_at > now()->subMonth(1)){
 
             if($expense->vaucher_path){
                 Storage::disk('public')->delete($expense->vaucher_path);
@@ -31,12 +31,12 @@ class ExpensesIndex extends Component
 
             $this->reset(['confirmDelete']);
 
-            session()->flash('notify-saved', 'Gasto eliminada satisfactoriamente');
+            session()->flash('notify-saved', 'Gasto eliminado satisfactoriamente');
 
         }else{
             $this->reset(['confirmDelete']);
 
-            session()->flash('notify-danger', 'No puedes eliminar un registro con más de un mes de antiguedad.');
+            session()->flash('notify-danger', 'No puedes eliminar un registro con más de un mes de antiguedad desde su registro.');
         }
     }
 

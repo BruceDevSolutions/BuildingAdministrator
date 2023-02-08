@@ -46,7 +46,7 @@ class FinesIndex extends Component
         $fine = Fine::findOrFail($this->changeStatus);
 
         if($fine->status){
-            if($fine->date > now()->subMonth(1)){
+            if($fine->created_at > now()->subMonth(1)){
                 $fine->update([
                     'status' => false
                 ]);

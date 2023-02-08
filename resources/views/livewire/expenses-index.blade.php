@@ -21,6 +21,7 @@
                             <th class="px-4 py-3">Monto</th>
                             <th class="px-4 py-3">Comprobante</th>
                             <th class="px-4 py-3">Fecha</th>
+                            <th class="px-4 py-3">Registro</th>
                             <th class="px-4 py-3">Acciones</th>
                         </tr>
                     </thead>
@@ -30,7 +31,7 @@
                                 <td class="px-4 py-3">
                                     {{ $expense->id }}
                                 </td>
-                                <td class="px-4 py-3 text-sm whitespace-nowrap">
+                                <td class="px-4 py-3 text-sm">
                                     {{ $expense->concept }}
                                 </td>
                                 <td class="px-4 py-3 text-sm whitespace-nowrap xl:whitespace-normal">
@@ -48,6 +49,9 @@
                                 </td>
                                 <td class="px-4 py-3 text-sm whitespace-nowrap">
                                     {{ $expense->date }}
+                                </td>
+                                <td class="px-4 py-3 text-sm whitespace-nowrap">
+                                    {{\Carbon\Carbon::parse($expense->created_at)->isoFormat('Y-MM-DD')}}
                                 </td>
                                 <td class="px-4 py-3">
                                     <div class="flex items-center space-x-4 text-sm">

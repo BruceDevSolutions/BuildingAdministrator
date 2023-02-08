@@ -21,12 +21,13 @@
                 <table class="w-full">
                     <thead>
                         <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-zinc-200 dark:text-gray-400 dark:bg-zinc-800">
-                            <th class="px-4 py-3">Identificador</th>
+                            <th class="px-4 py-3">Id</th>
                             <th class="px-4 py-3">Concepto</th>
                             <th class="px-4 py-3">Detalles</th>
                             <th class="px-4 py-3">Monto</th>
                             <th class="px-4 py-3">Inmueble</th>
                             <th class="px-4 py-3">Fecha</th>
+                            <th class="px-4 py-3">Registro</th>
                             <th class="px-4 py-3">Estado</th>
                             <th class="px-4 py-3">Acciones</th>
                         </tr>
@@ -51,6 +52,9 @@
                                 </td>
                                 <td class="px-4 py-3 text-sm whitespace-nowrap">
                                     {{ $fine->date }}
+                                </td>
+                                <td class="px-4 py-3 text-sm whitespace-nowrap">
+                                    {{\Carbon\Carbon::parse($fine->created_at)->isoFormat('Y-MM-DD')}}
                                 </td>
                                 <td class="px-4 py-3 text-xs">
                                     <div class="cursor-pointer" wire:click="changeFineStatus({{ $fine->id }})">

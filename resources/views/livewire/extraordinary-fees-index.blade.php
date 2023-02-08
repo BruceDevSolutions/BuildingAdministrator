@@ -29,6 +29,7 @@
                             <th class="px-4 py-3">Pagado</th>
                             <th class="px-4 py-3">Pendiente</th>
                             <th class="px-4 py-3">Fecha</th>
+                            <th class="px-4 py-3">Registro</th>
                             <th class="px-4 py-3">Estado</th>
                             <th class="px-4 py-3">Acciones</th>
                         </tr>
@@ -66,8 +67,11 @@
                                 <td class="px-4 py-3 text-sm whitespace-nowrap">
                                     {{ $fine->date }}
                                 </td>
+                                <td class="px-4 py-3 text-sm whitespace-nowrap">
+                                    {{\Carbon\Carbon::parse($fine->created_at)->isoFormat('Y-MM-DD')}}
+                                </td>
                                 <td class="px-4 py-3 text-xs">
-                                    <div class="cursor-pointer">
+                                    <div>
                                         @if($fine->status)
                                             <span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-700">
                                                 Pagado

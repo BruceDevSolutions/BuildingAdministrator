@@ -134,7 +134,7 @@ class IncomeCreateForm extends Component
     
             return redirect()->route('finances.incomes.index')->with('notify-saved', 'Registro creado satisfactoriamente.');
     
-        }else{
+        }else if($this->type_id == Income::CUOTA_EXTRAORDINARIA && !$this->fee_selected){
             session()->flash('notify-danger', 'Selecciona una cuota extraordinaria válida');
         }
 
