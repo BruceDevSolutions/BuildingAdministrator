@@ -46,5 +46,15 @@ class ExtraordinaryFeeSeeder extends Seeder
 
         $extraordinaryFee3->properties()->attach([1 => ['status' => false],3 => ['status' => false],5 => ['status' => true],7 => ['status' => false], 9 => ['status' => false], 12 => ['status' => true]]);
         
+        $extraordinaryFee4 = ExtraordinaryFee::create([
+            'concept' => 'Esta es una prueba',
+            'details' => 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Accusantium molestiae officiis, culpa perferendis similique quam, perspiciatis minima debitis voluptatibus corrupti veritatis cum at voluptatum libero reiciendis. Cumque aspernatur tenetur ratione?.',
+            'date' => now()->subMonth(3),
+            'value' => 200,
+            'user_id' => 1
+        ]);
+
+        $extraordinaryFee4->properties()->attach([1 => ['status' => false],3 => ['status' => false],5 => ['status' => true],7 => ['status' => false], 9 => ['status' => false], 12 => ['status' => true]]);
+        
     }
 }

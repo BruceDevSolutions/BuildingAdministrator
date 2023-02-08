@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\Income;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class IncomesIndex extends Component
@@ -32,6 +33,12 @@ class IncomesIndex extends Component
             /* Para revertir la multa */
             if($income->property_fine){
                 $income->fine()->update(['status' => false]);
+            }
+
+            if($income->property_extraordinary_fee){
+                $property = $income->property_extraordinary_fee[0];
+
+                $fee = DB::table('extraordinary_fee_property')->where('property_id', $property->id)->where('extraordinary_fee_id', $property->pivot->extraordinary_fee_id)->update(['status' => false]);
             }
 
             $income->delete();

@@ -34,6 +34,11 @@
             <x-title>Inmueble:</x-title>
             <x-paragraph>{{ $income->property_fine[0]->code }}</x-paragraph>
         </div>
+    @elseif($income->type == 2)
+        <div class="mb-4">
+            <x-title>Inmueble:</x-title>
+            <x-paragraph>{{ $income->property_extraordinary_fee[0]->code }}</x-paragraph>
+        </div>
     @endif
     
     <div>

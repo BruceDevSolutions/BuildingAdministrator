@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\ExtraordinaryFee;
 use App\Models\Fine;
 use App\Models\Income;
 use Livewire\Component;
@@ -9,6 +10,7 @@ use App\Models\Property;
 use Livewire\WithFileUploads;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class IncomeCreateForm extends Component
 {
@@ -20,9 +22,16 @@ class IncomeCreateForm extends Component
     public $date;
     public $vaucher_path;
     public $type_id = null;
+
+    /* Multas */
     public $property_fine_id;
     public $property_fines;
     public $fine_selected;
+
+    /* Cuotas extraordinarias */
+    public $property_fee_id;
+    public $property_fees;
+    public $fee_selected;
 
     protected function rules()
     {
@@ -43,6 +52,25 @@ class IncomeCreateForm extends Component
         $this->validateOnly($propertyName);
     }
 
+    public function updatedPropertyFeeId()
+    {
+        if($this->property_fee_id){
+            $this->property_fees = Property::findOrFail($this->property_fee_id)->fees_pendant ?? false;
+        }
+    }
+
+    public function updatedFeeSelected()
+    {
+        if($this->property_fees){
+            if($this->fee_selected){
+                $fee = ExtraordinaryFee::findOrFail($this->fee_selected);
+                $this->concept = "Pago por: $fee->concept";
+                $this->value = $fee->value;
+            }
+        }
+    }
+
+    /* Multas */
     public function updatedPropertyFineId()
     {
         if($this->property_fine_id){
@@ -83,8 +111,31 @@ class IncomeCreateForm extends Component
     
             return redirect()->route('finances.incomes.index')->with('notify-saved', 'Registro creado satisfactoriamente.');
     
-        }else{
+        }else if($this->type_id == Income::MULTA && !$this->fine_selected){
             session()->flash('notify-danger', 'Selecciona una multa válida');
+        }
+
+        /* Cuotas extraordinarias */
+        if($this->type_id == Income::CUOTA_EXTRAORDINARIA && $this->fee_selected){
+            $fee = DB::table('extraordinary_fee_property')->where('property_id', $this->property_fee_id)->where('extraordinary_fee_id', $this->fee_selected)->update(['status' => true]);
+
+            $validatedData['type'] = Income::CUOTA_EXTRAORDINARIA;
+
+        /*     $fee->update(['status' => true]); */
+
+            if($this->vaucher_path){
+                $background_name = $this->vaucher_path->store('/incomes/vaucher', 'public');
+                $validatedData['vaucher_path'] = $background_name;
+            }
+
+            $income = Income::create(array_filter($validatedData));
+    
+            $income->property_extraordinary_fee()->attach([$this->property_fee_id => ['extraordinary_fee_id' => $this->fee_selected]]);
+    
+            return redirect()->route('finances.incomes.index')->with('notify-saved', 'Registro creado satisfactoriamente.');
+    
+        }else{
+            session()->flash('notify-danger', 'Selecciona una cuota extraordinaria válida');
         }
 
     }

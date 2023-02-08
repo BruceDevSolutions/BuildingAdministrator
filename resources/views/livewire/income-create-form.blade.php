@@ -51,6 +51,7 @@
                         error-name="vaucher_path"
                     />
                     
+                    {{-- Multas --}}
                     <div>
                         @if($type_id == 1)
                             <x-forms.select label="Inmueble" wire:model="property_fine_id">
@@ -59,19 +60,39 @@
                                     <option value="{{ $property->id }}" >{{ $property->code }}</option>
                                 @endforeach
                             </x-forms.select>
+                            @if($property_fines[0] ?? false)
+                                <x-forms.select error-name="fine_selected" label="Selecciona una multa" wire:model="fine_selected">
+                                    <option value="null" selected>--Selecciona una multa--</option>
+                                    @foreach ($property_fines as $fine)
+                                        <option value="{{ $fine->id }}" >{{ $fine->id }} -- {{ $fine->concept }}</option>
+                                    @endforeach
+                                </x-forms.select>
+                            @else
+                                <x-paragraph class="mt-4 text-sm">El inmueble seleccionado no tiene multas pendientes.</x-paragraph>
+                            @endif
                         @endif
-                        
-                        @if($property_fines[0] ?? false)
-                            <x-forms.select error-name="fine_selected" label="Selecciona una multa" wire:model="fine_selected">
-                                <option value="null" selected>--Selecciona una multa--</option>
-                                @foreach ($property_fines as $fine)
-                                    <option value="{{ $fine->id }}" >{{ $fine->id }} -- {{ $fine->concept }}</option>
+                    </div>
+
+                    {{-- Cuotas extraordinarias --}}
+                    <div>
+                        @if($type_id == 2)
+                            <x-forms.select label="Inmueble" wire:model="property_fee_id">
+                                <option value="null" selected>--Selecciona un inmueble--</option>
+                                @foreach ($properties as $property)
+                                    <option value="{{ $property->id }}" >{{ $property->code }}</option>
                                 @endforeach
                             </x-forms.select>
-                        @else
-                            <x-paragraph class="mt-4 text-sm">El inmueble seleccionado no tiene multas pendientes.</x-paragraph>
+                            @if($property_fees[0] ?? false)
+                                <x-forms.select error-name="fee_selected" label="Selecciona una cuota extraordinaria" wire:model="fee_selected">
+                                    <option value="null" selected>--Selecciona una cuota extraordinaria--</option>
+                                    @foreach ($property_fees as $fee)
+                                        <option value="{{ $fee->id }}" >{{ $fee->id }} -- {{ $fee->concept }}</option>
+                                    @endforeach
+                                </x-forms.select>
+                            @else
+                                <x-paragraph class="mt-4 text-sm">El inmueble seleccionado no tiene cuotas extraordinarias pendientes.</x-paragraph>
+                            @endif
                         @endif
-
                     </div>
                 </div>
                 <div class="mt-8 flex justify-end">

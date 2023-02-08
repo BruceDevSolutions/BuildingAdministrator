@@ -30,7 +30,7 @@ class Income extends Model
 
     public function property_extraordinary_fee()
     {
-        return $this->belongsToMany(Property::class, 'income_extraordinary_fee_property');
+        return $this->belongsToMany(Property::class, 'income_extraordinary_fee_property')->withPivot(['extraordinary_fee_id']);
     }
 
     public function property_expense()

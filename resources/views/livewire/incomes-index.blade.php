@@ -43,7 +43,7 @@
                             <td class="px-4 py-3">
                                 {{ $income->id }}
                             </td>
-                            <td class="px-4 py-3 text-sm whitespace-nowrap">
+                            <td class="px-4 py-3 text-sm ">
                                 {{ $income->concept }}
                             </td>
                             <td class="px-4 py-3 text-sm whitespace-nowrap xl:whitespace-normal">
