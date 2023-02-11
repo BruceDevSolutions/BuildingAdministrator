@@ -94,6 +94,34 @@
                             @endif
                         @endif
                     </div>
+
+                    {{-- Expensas --}}
+                    <div>
+                        @if($type_id == 3)
+                            <x-forms.select label="Inmueble" wire:model="property_expense_id">
+                                <option value="null" selected>--Selecciona un inmueble--</option>
+                                @foreach ($properties as $property)
+                                    <option value="{{ $property->id }}" >{{ $property->code }}</option>
+                                @endforeach
+                            </x-forms.select>
+                            <x-forms.input 
+                                wire:model="paid_up_to"
+                                label="Pagado hasta:"
+                                placeholder="Ingresa el concepto de la deuda"
+                                error-name="paid_up_to"
+                                value="{{ $paid_up_to }}" 
+                                min="{{ $paid_up_to }}" 
+                                type="month"
+                            />
+                            <x-forms.input 
+                                wire:model="names"
+                                label="Pagado por:"
+                                type="text"
+                                placeholder="Ingresa el nombre de la persona que realizó el pago"
+                                error-name="names"
+                            />
+                        @endif
+                    </div>
                 </div>
                 <div class="mt-8 flex justify-end">
                     <x-button>

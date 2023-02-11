@@ -2,15 +2,16 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\ExtraordinaryFee;
+use Carbon\Carbon;
 use App\Models\Fine;
 use App\Models\Income;
 use Livewire\Component;
 use App\Models\Property;
 use Livewire\WithFileUploads;
 use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\Auth;
+use App\Models\ExtraordinaryFee;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class IncomeCreateForm extends Component
 {
@@ -33,6 +34,11 @@ class IncomeCreateForm extends Component
     public $property_fees;
     public $fee_selected;
 
+    /* Expensas */
+    public $property_expense_id;
+    public $paid_up_to;
+    public $names;
+
     protected function rules()
     {
         return [
@@ -43,13 +49,27 @@ class IncomeCreateForm extends Component
             'type_id' => ['required', 'in:1,2,3'],
             'vaucher_path' => ['nullable','mimes:jpg,png,pdf','max:3072'],
             'property_fine_id' => ['nullable', Rule::exists('properties','id')],
+            'property_expense_id' => ['nullable', Rule::exists('properties','id')],
+            'property_fee_id' => ['nullable', Rule::exists('properties','id')],
             'fine_selected' => ['nullable', Rule::exists('fines','id')],
+            'fee_selected' => ['nullable', Rule::exists('fines','id')],
         ];
     }
 
     public function updated($propertyName)
     {
         $this->validateOnly($propertyName);
+    }
+    /* Expensa */
+    public function updatedPropertyExpenseId($value)
+    {
+        $this->value = Property::find($this->property_expense_id)->monthly_rate;
+
+        if(Property::find($this->property_expense_id)->expenses->count()){
+            $this->paid_up_to = Carbon::parse(Property::find($this->property_expense_id)->expenses->first()->pivot->paid_up_to)->addMonth()->isoFormat('YYYY-MM'); 
+        }else{
+            $this->paid_up_to = '';
+        }
     }
 
     public function updatedPropertyFeeId()
@@ -119,6 +139,31 @@ class IncomeCreateForm extends Component
         if($this->type_id == Income::CUOTA_EXTRAORDINARIA && $this->fee_selected){
             $fee = DB::table('extraordinary_fee_property')->where('property_id', $this->property_fee_id)->where('extraordinary_fee_id', $this->fee_selected)->update(['status' => true]);
 
+            $validatedData['type'] = Income::CUOTA_EXTRAORDINARIA;
+
+        /*     $fee->update(['status' => true]); */
+
+            if($this->vaucher_path){
+                $background_name = $this->vaucher_path->store('/incomes/vaucher', 'public');
+                $validatedData['vaucher_path'] = $background_name;
+            }
+
+            $income = Income::create(array_filter($validatedData));
+    
+            $income->property_extraordinary_fee()->attach([$this->property_fee_id => ['extraordinary_fee_id' => $this->fee_selected]]);
+    
+            return redirect()->route('finances.incomes.index')->with('notify-saved', 'Registro creado satisfactoriamente.');
+    
+        }else if($this->type_id == Income::CUOTA_EXTRAORDINARIA && !$this->fee_selected){
+            session()->flash('notify-danger', 'Selecciona una cuota extraordinaria válida');
+        }
+
+        /* Pago de expensas */
+        if($this->type_id == Income::EXPENSA){
+            $this->validate([
+                'names' => 'required|min:3'
+            ]);
+            
             $validatedData['type'] = Income::CUOTA_EXTRAORDINARIA;
 
         /*     $fee->update(['status' => true]); */

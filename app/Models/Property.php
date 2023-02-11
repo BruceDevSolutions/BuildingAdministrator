@@ -44,4 +44,9 @@ class Property extends Model
     {
         return $this->belongsToMany(ExtraordinaryFee::class, 'extraordinary_fee_property')->wherePivot('status', false);
     }
+
+    public function expenses()
+    {
+        return $this->belongsToMany(Income::class, 'income_expense_property')->withPivot(['paid_up_to','names']);
+    }
 }

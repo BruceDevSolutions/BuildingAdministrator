@@ -31,11 +31,11 @@ class IncomesIndex extends Component
             }
 
             /* Para revertir la multa */
-            if($income->property_fine){
+            if($income->property_fine ?? false){
                 $income->fine()->update(['status' => false]);
             }
 
-            if($income->property_extraordinary_fee){
+            if($income->property_extraordinary_fee[0] ?? false){
                 $property = $income->property_extraordinary_fee[0];
 
                 $fee = DB::table('extraordinary_fee_property')->where('property_id', $property->id)->where('extraordinary_fee_id', $property->pivot->extraordinary_fee_id)->update(['status' => false]);
