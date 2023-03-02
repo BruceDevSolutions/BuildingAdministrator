@@ -53,6 +53,7 @@ class IncomeCreateForm extends Component
             'property_fee_id' => ['nullable', Rule::exists('properties','id')],
             'fine_selected' => ['nullable', Rule::exists('fines','id')],
             'fee_selected' => ['nullable', Rule::exists('fines','id')],
+            'names' => $this->type_id === Income::EXPENSA ? [ 'required', 'min:3'] : [],
         ];
     }
 
@@ -60,6 +61,7 @@ class IncomeCreateForm extends Component
     {
         $this->validateOnly($propertyName);
     }
+
     /* Expensa */
     public function updatedPropertyExpenseId($value)
     {
@@ -137,11 +139,9 @@ class IncomeCreateForm extends Component
 
         /* Cuotas extraordinarias */
         if($this->type_id == Income::CUOTA_EXTRAORDINARIA && $this->fee_selected){
-            $fee = DB::table('extraordinary_fee_property')->where('property_id', $this->property_fee_id)->where('extraordinary_fee_id', $this->fee_selected)->update(['status' => true]);
+            DB::table('extraordinary_fee_property')->where('property_id', $this->property_fee_id)->where('extraordinary_fee_id', $this->fee_selected)->update(['status' => true]);
 
             $validatedData['type'] = Income::CUOTA_EXTRAORDINARIA;
-
-        /*     $fee->update(['status' => true]); */
 
             if($this->vaucher_path){
                 $background_name = $this->vaucher_path->store('/incomes/vaucher', 'public');
@@ -160,11 +160,8 @@ class IncomeCreateForm extends Component
 
         /* Pago de expensas */
         if($this->type_id == Income::EXPENSA){
-            $this->validate([
-                'names' => 'required|min:3'
-            ]);
             
-            $validatedData['type'] = Income::CUOTA_EXTRAORDINARIA;
+            $validatedData['type'] = Income::EXPENSA;
 
         /*     $fee->update(['status' => true]); */
 
