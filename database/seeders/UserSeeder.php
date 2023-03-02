@@ -22,8 +22,8 @@ class UserSeeder extends Seeder
             'last_name' => 'Arana',
             'ci' => '4568789',
             'departament_id' => 4,
-            'email' => 'mauro@gmail.com',
-            'password' => Hash::make('123456789'),
+            'email' => 'admin@admin.com',
+            'password' => Hash::make('admin'),
         ]);
 
         Phone::create([

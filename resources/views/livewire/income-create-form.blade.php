@@ -39,7 +39,7 @@
         
                     <x-forms.input 
                         wire:model="date"
-                        label="Fecha "
+                        label="Fecha de pago"
                         type="date"
                         error-name="date"
                     />
