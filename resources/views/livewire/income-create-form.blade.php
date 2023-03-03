@@ -34,7 +34,7 @@
                         type="Number"
                         placeholder="Ingresa un monto"
                         error-name="value"
-                        :disabled="$fine_selected ?? false"
+                        :disabled="$fine_selected || $property_expense_id ?? false"
                     />
         
                     <x-forms.input 

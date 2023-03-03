@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Expense;
 use Carbon\Carbon;
 use App\Models\Fine;
 use App\Models\Income;
@@ -65,6 +66,29 @@ class IncomeCreateForm extends Component
         $this->validateOnly($propertyName);
     }
 
+    public function updatedTypeId()
+    {
+        $this->reset([
+            'concept',
+            'details',
+            'value',
+            'date',
+            'vaucher_path',
+            'property_fine_id',
+            'property_fines',
+            'fine_selected',
+            'property_fee_id',
+            'property_fees',
+            'fee_selected',
+            'property_expense_id',
+            'paid_up_to',
+            'names',
+            'new_paid_month',
+            'last_paid',
+            'property',
+        ]);
+    }
+
     /* Expensa */
     public function updatedPropertyExpenseId($value)
     {
@@ -78,7 +102,7 @@ class IncomeCreateForm extends Component
                 $this->concept = "Pago de expensas del inmueble: $property_code";
                 if($this->property->expenses->count()){
                     $this->last_paid = $this->property->expenses->last()->pivot->paid_up_to;
-                    $this->new_paid_month = Carbon::parse($this->last_paid)->addMonths(2)->toFormattedDateString();
+                    $this->new_paid_month = Carbon::parse($this->last_paid)->addMonth()->Format('F Y');
                     $this->details = "Pago de expensas del inmueble $property_code correspondiente al mes de $this->new_paid_month";
                     $this->paid_up_to = Carbon::parse($this->last_paid)->addMonth()->isoFormat('YYYY-MM'); 
                 }else{
@@ -91,7 +115,7 @@ class IncomeCreateForm extends Component
     public function updatedPaidUpTo()
     {
         $property_code = $this->property->code;
-        $this->new_paid_month = Carbon::parse($this->paid_up_to)->addMonth()->toFormattedDateString();
+        $this->new_paid_month = Carbon::parse($this->paid_up_to)->Format('F Y');
         $this->details = "Pago de expensas del inmueble $property_code correspondiente hasta el mes de $this->new_paid_month";
     }
 
