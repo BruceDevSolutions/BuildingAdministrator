@@ -38,6 +38,9 @@ class IncomeCreateForm extends Component
     public $property_expense_id;
     public $paid_up_to;
     public $names;
+    public $new_paid_month;
+    public $last_paid;
+    public $property;
 
     protected function rules()
     {
@@ -67,16 +70,17 @@ class IncomeCreateForm extends Component
     {
         if($this->property_expense_id){
 
-            $property = Property::find($this->property_expense_id);
+            $this->property = Property::find($this->property_expense_id);
 
-            if($property){
-                $this->value = $property->monthly_rate;
-                $this->concept = "Pago de expensas del inmueble: $property->code";
-                if($property->expenses->count()){
-                    $last_paid = $property->expenses->first()->pivot->paid_up_to;
-                    $new_paid_month = Carbon::parse($last_paid)->addMonths(2)->toFormattedDateString();
-                    $this->details = "Pago de expensas del inmueble $property->code correspondiente al mes de $new_paid_month";
-                    $this->paid_up_to = Carbon::parse($last_paid)->addMonth()->isoFormat('YYYY-MM'); 
+            if($this->property){
+                $property_code = $this->property->code;
+                $this->value = $this->property->monthly_rate;
+                $this->concept = "Pago de expensas del inmueble: $property_code";
+                if($this->property->expenses->count()){
+                    $this->last_paid = $this->property->expenses->last()->pivot->paid_up_to;
+                    $this->new_paid_month = Carbon::parse($this->last_paid)->addMonths(2)->toFormattedDateString();
+                    $this->details = "Pago de expensas del inmueble $property_code correspondiente al mes de $this->new_paid_month";
+                    $this->paid_up_to = Carbon::parse($this->last_paid)->addMonth()->isoFormat('YYYY-MM'); 
                 }else{
                     $this->paid_up_to = '';
                 }
@@ -84,10 +88,11 @@ class IncomeCreateForm extends Component
         }
     }
 
-    public function updatedPropertyValue(){
-        if($this->type_id == Income::EXPENSA){
-            $this->details = '';
-        }
+    public function updatedPaidUpTo()
+    {
+        $property_code = $this->property->code;
+        $this->new_paid_month = Carbon::parse($this->paid_up_to)->addMonth()->toFormattedDateString();
+        $this->details = "Pago de expensas del inmueble $property_code correspondiente hasta el mes de $this->new_paid_month";
     }
 
     public function updatedPropertyFeeId()
@@ -126,7 +131,6 @@ class IncomeCreateForm extends Component
             }
         }
     }
-
 
     public function save()
     {

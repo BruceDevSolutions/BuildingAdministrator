@@ -122,6 +122,7 @@
                             />
                         @endif
                     </div>
+                    {{ $new_paid_month }}
                 </div>
                 <div class="mt-8 flex justify-end">
                     <x-button>
