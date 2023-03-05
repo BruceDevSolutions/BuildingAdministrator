@@ -35,6 +35,6 @@ class Income extends Model
 
     public function property_expense()
     {
-        return $this->belongsToMany(Property::class, 'income_expense_property');
+        return $this->belongsToMany(Property::class, 'income_expense_property')->withPivot(['paid_up_to']);
     }
 }

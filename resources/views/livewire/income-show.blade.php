@@ -25,7 +25,7 @@
     </div>
 
     <div class="mb-4">
-        <x-title>Fecha:</x-title>
+        <x-title>Fecha de pago:</x-title>
         <x-paragraph>{{ $income->date }}</x-paragraph>
     </div>
     
@@ -38,6 +38,16 @@
         <div class="mb-4">
             <x-title>Inmueble:</x-title>
             <x-paragraph>{{ $income->property_extraordinary_fee[0]->code }}</x-paragraph>
+        </div>
+    @elseif($income->type == 3  )
+        <div class="mb-4">
+            <x-title>Inmueble:</x-title>
+            <x-paragraph>{{ $income->property_expense[0]->code }}</x-paragraph>
+        </div>
+
+        <div class="mb-4">
+            <x-title>Pagado hasta:</x-title>
+            <x-paragraph>{{ \Carbon\Carbon::parse($income->property_expense[0]->pivot->paid_up_to)->Format('F Y') }}</x-paragraph>
         </div>
     @endif
     

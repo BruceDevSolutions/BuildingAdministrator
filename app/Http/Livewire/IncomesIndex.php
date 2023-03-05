@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\Income;
 use Livewire\Component;
+use App\Models\Property;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -24,11 +25,22 @@ class IncomesIndex extends Component
     {
         $income = Income::findOrFail($this->confirmDelete);
 
+        if($income->type == Income::EXPENSA){
+            $income_property_id = $income->property_expense[0]->pivot->property_id;
+            $last_income_id = Property::find($income_property_id)->expenses->last()->id;
+            
+            if($income->id < $last_income_id){
+                session()->flash('notify-danger', 'Elimina los pagos de expensa más recientes relacionados con esta propiedad primero.');
+                $this->reset(['confirmDelete']);
+                return;
+            }
+        }
+
         if($income->created_at > now()->subMonth(1)){
 
             if($income->vaucher_path){
                 Storage::disk('public')->delete($income->vaucher_path);
-            }
+            } 
 
             /* Para revertir la multa */
             if($income->property_fine ?? false){

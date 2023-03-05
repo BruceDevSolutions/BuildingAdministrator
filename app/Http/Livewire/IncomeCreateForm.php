@@ -103,7 +103,7 @@ class IncomeCreateForm extends Component
                 if($this->property->expenses->count()){
                     $this->last_paid = $this->property->expenses->last()->pivot->paid_up_to;
                     $this->new_paid_month = Carbon::parse($this->last_paid)->addMonth()->Format('F Y');
-                    $this->details = "Pago de expensas del inmueble $property_code correspondiente al mes de $this->new_paid_month";
+                    $this->details = "Pago de expensas del inmueble $property_code correspondiente hasta el mes de $this->new_paid_month";
                     $this->paid_up_to = Carbon::parse($this->last_paid)->addMonth()->isoFormat('YYYY-MM'); 
                 }else{
                     $this->paid_up_to = '';
@@ -114,9 +114,11 @@ class IncomeCreateForm extends Component
 
     public function updatedPaidUpTo()
     {
-        $property_code = $this->property->code;
-        $this->new_paid_month = Carbon::parse($this->paid_up_to)->Format('F Y');
-        $this->details = "Pago de expensas del inmueble $property_code correspondiente hasta el mes de $this->new_paid_month";
+        if($this->property_expense_id){
+            $property_code = $this->property->code;
+            $this->new_paid_month = Carbon::parse($this->paid_up_to)->Format('F Y');
+            $this->details = "Pago de expensas del inmueble $property_code correspondiente hasta el mes de $this->new_paid_month";
+        }
     }
 
     public function updatedPropertyFeeId()
@@ -195,7 +197,10 @@ class IncomeCreateForm extends Component
 
             $income = Income::create(array_filter($validatedData));
     
-            $income->property_extraordinary_fee()->attach([$this->property_fee_id => ['extraordinary_fee_id' => $this->fee_selected]]);
+            $income->property_extraordinary_fee()
+                ->attach(
+                    [$this->property_fee_id => ['extraordinary_fee_id' => $this->fee_selected]]
+                );
     
             return redirect()->route('finances.incomes.index')->with('notify-saved', 'Registro creado satisfactoriamente.');
     
@@ -204,11 +209,9 @@ class IncomeCreateForm extends Component
         }
 
         /* Pago de expensas */
-        if($this->type_id == Income::EXPENSA){
+        if($this->type_id == Income::EXPENSA && $this->property_expense_id){
             
             $validatedData['type'] = Income::EXPENSA;
-
-        /*     $fee->update(['status' => true]); */
 
             if($this->vaucher_path){
                 $background_name = $this->vaucher_path->store('/incomes/vaucher', 'public');
@@ -217,14 +220,13 @@ class IncomeCreateForm extends Component
 
             $income = Income::create(array_filter($validatedData));
     
-            $income->property_extraordinary_fee()->attach([$this->property_fee_id => ['extraordinary_fee_id' => $this->fee_selected]]);
+            $income->property_expense()->attach([$this->property_expense_id => ['names' => $this->names, 'paid_up_to' => Carbon::createFromFormat('Y-m', $this->paid_up_to)]]);
     
             return redirect()->route('finances.incomes.index')->with('notify-saved', 'Registro creado satisfactoriamente.');
     
-        }else if($this->type_id == Income::CUOTA_EXTRAORDINARIA && !$this->fee_selected){
-            session()->flash('notify-danger', 'Selecciona una cuota extraordinaria válida');
+        }else if($this->type_id == Income::EXPENSA && !$this->property_expense_id){
+            session()->flash('notify-danger', 'Selecciona un inmueble válido');
         }
-
     }
 
     public function render()

@@ -79,9 +79,9 @@ class IncomeSeeder extends Seeder
             'user_id' => 1,
         ]);
 
-        $expense2->property_expense()->attach([2 => ['paid_up_to' => now()->subMonth(1), 'names' => 'Nombre prueba']]);
+        $expense3->property_expense()->attach([2 => ['paid_up_to' => now()->subMonth(1), 'names' => 'Nombre prueba']]);
 
-        $expense3 = Income::create([ 
+        $expense4 = Income::create([ 
             'concept' => 'Ad dicta voluptatibus repellat quos.',
             'details' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis tempora repudiandae repellat aut minus quidem laboriosam blanditiis quia minima quae debitis similique, porro adipisci iste animi velit laborum quod provident.',
             'value' => 400,
@@ -90,9 +90,9 @@ class IncomeSeeder extends Seeder
             'user_id' => 1,
         ]);
 
-        $expense3->property_expense()->attach([3 => ['paid_up_to' => now()->subMonth(4), 'names' => 'Nombre prueba']]);
+        $expense4->property_expense()->attach([3 => ['paid_up_to' => now()->subMonth(4), 'names' => 'Nombre prueba']]);
 
-        $expense4 = Income::create([ 
+        $expense5 = Income::create([ 
             'concept' => 'Commodi illum natus.',
             'details' => 'Hic  ipsum dolor sit amet consectetur adipisicing elit. Odit, iste harum facilis, perspiciatis amet aliquid voluptates ex dignissimos nemo laboriosam nisi nulla fuga repellat exercitationem? Dolorum hic odio optio inventore.',
             'value' => 400,
@@ -101,10 +101,10 @@ class IncomeSeeder extends Seeder
             'user_id' => 1,
         ]);
 
-        $expense4->property_expense()->attach([4 => ['paid_up_to' => now()->subMonth(1), 'names' => 'Nombre prueba']]);
+        $expense5->property_expense()->attach([4 => ['paid_up_to' => now()->subMonth(1), 'names' => 'Nombre prueba']]);
 
-        $expense5 = Income::create([
-            'concept' => 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. .',
+        $expense6 = Income::create([
+            'concept' => 'Lorem ipsum dolor sit, amet consectetur adipisicing elit.',
             'details' => 'Voluptatem exercitationem ipsum quam aliquid molestiae asperiores enim possimus adipisci. Optio quidem reprehenderit eveniet mollitia, molestias temporibus ut eos necessitatibus quas ullam.',
             'value' => 400,
             'date' => now(),
@@ -112,6 +112,6 @@ class IncomeSeeder extends Seeder
             'user_id' => 1,
         ]);
 
-        $expense2->property_expense()->attach([5 => ['paid_up_to' => now()->subMonth(1), 'names' => 'Nombre prueba']]);
+        $expense6->property_expense()->attach([5 => ['paid_up_to' => now()->subMonth(1), 'names' => 'Nombre prueba']]);
     }
 }
