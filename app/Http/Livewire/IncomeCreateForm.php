@@ -201,6 +201,12 @@ class IncomeCreateForm extends Component
                 ->attach(
                     [$this->property_fee_id => ['extraordinary_fee_id' => $this->fee_selected]]
                 );
+
+            $extraordinary_fee = ExtraordinaryFee::find($this->fee_selected); 
+            
+            if(!$extraordinary_fee->properties_pending->count()){
+                $extraordinary_fee->update(['status' => true]);
+            }
     
             return redirect()->route('finances.incomes.index')->with('notify-saved', 'Registro creado satisfactoriamente.');
     

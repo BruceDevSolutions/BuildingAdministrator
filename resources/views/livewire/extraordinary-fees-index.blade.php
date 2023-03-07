@@ -86,7 +86,7 @@
                                 <td class="px-4 py-3">
                                     <div class="flex items-center space-x-4 text-sm">
                                         <x-delete-button wire:click="confirmDeleteFine({{ $fine->id }})" />
-                                        <a href="{{ route('properties.fines.show', $fine->id) }}">
+                                        <a href="{{ route('properties.extraordinary-fees.show', $fine->id) }}">
                                             <x-view-button />
                                         </a>
                                     </div>
@@ -94,7 +94,7 @@
                             </tr>
                         @empty
                             <tr class="text-gray-700 dark:text-gray-400">
-                                <td colspan="8" class="py-6 text-center">
+                                <td colspan="11" class="py-6 text-center">
                                     Aún no hay registros de cuotas extraordinarios.
                                 </td>
                             </tr>

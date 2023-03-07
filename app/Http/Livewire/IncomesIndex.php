@@ -6,6 +6,7 @@ use App\Models\Income;
 use Livewire\Component;
 use App\Models\Property;
 use Livewire\WithPagination;
+use App\Models\ExtraordinaryFee;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
@@ -51,7 +52,13 @@ class IncomesIndex extends Component
                 $property = $income->property_extraordinary_fee[0];
 
                 $fee = DB::table('extraordinary_fee_property')->where('property_id', $property->id)->where('extraordinary_fee_id', $property->pivot->extraordinary_fee_id)->update(['status' => false]);
+                
+                if($income->property_extraordinary_fee[0]){
+                    ExtraordinaryFee::find($income->property_extraordinary_fee[0]->pivot->extraordinary_fee_id)->update(['status' => false]);
+                }
             }
+
+
 
             $income->delete();
 

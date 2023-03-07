@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('extraordinary_fees', function (Blueprint $table) {
             $table->id();
             $table->string('concept',180);
-            $table->text('details');
+            $table->text('details')->nullable();
             $table->date('date');
             $table->double('value');
             $table->boolean('status')->default(false);

@@ -67,7 +67,7 @@ class PropertySeeder extends Seeder
         ]);
 
         Property::create([
-            'code' => '2A',
+            'code' => '3A',
             'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi impedit eligendi, laboriosam pariatur officiis suscipit expedita voluptate atque cupiditate incidunt amet voluptatum. Quos, quasi commodi. Ducimus nihil sapiente quisquam alias.',
             'monthly_rate' => 400.00,
             'property_type' => 1,

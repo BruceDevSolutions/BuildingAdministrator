@@ -16,7 +16,7 @@ class HomeController extends Controller
      */
     public function __invoke(Request $request)
     {
-        $general_settings= Setting::select('building_name', 'welcome_message')->first();
+        $general_settings = Setting::select('building_name', 'welcome_message')->first();
 
         $pinned_announcements = Announcement::where('status', true)->where('pinned', true)->get();
 

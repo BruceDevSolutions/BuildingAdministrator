@@ -29,6 +29,7 @@ class ExtraordinaryFeesIndex extends Component
             $fine->delete();
 
             $this->reset(['confirmDelete']);
+            
 
             session()->flash('notify-saved', 'Cuota extraordinaria eliminada satisfactoriamente');
 
@@ -53,7 +54,6 @@ class ExtraordinaryFeesIndex extends Component
                 $query->where('code','like','%'.$this->search.'%');
             })->orderBy('id','desc')->paginate(5);
         }
-
 
         return view('livewire.extraordinary-fees-index', compact('fines'))->layoutData(['title' => 'Cuotas extraordinarias']);
     }

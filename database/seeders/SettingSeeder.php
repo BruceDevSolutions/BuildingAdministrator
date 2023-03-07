@@ -18,7 +18,7 @@ class SettingSeeder extends Seeder
         Setting::create([
             'building_name' => 'BuildingAdministrator',
             'departament_id' => 4,
-            'welcome_message' => 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nulla tempora similique quisquam magnam fugiat sint ullam voluptatum, laudantium tenetur asperiores necessitatibus, deserunt maiores. Similique nemo saepe modi fugiat libero iste!'
+            'welcome_message' => 'LLorem ipsum dolor sit amet consectetur, adipisicing elit. Nulla tempora similique quisquam magnam fugiat sint ullam voluptatum, laudantium tenetur asperiores necessitatibus, deserunt maiores. Similique nemo saepe modi fugiat libero iste!'
         ]);
     }
 }

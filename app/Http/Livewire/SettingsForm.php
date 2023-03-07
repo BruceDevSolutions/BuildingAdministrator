@@ -28,13 +28,13 @@ class SettingsForm extends Component
     
     public function mount()
     {
-        $this->building_name = $this->settings->building_name;
-        $this->address = $this->settings->address;
-        $this->building_number = $this->settings->building_number;
-        $this->email = $this->settings->email;
-        $this->application_logo_path = $this->settings->application_logo_path;
-        $this->welcome_message = $this->settings->welcome_message;
-        $this->departament_id = $this->settings->departament_id;
+        $this->building_name = isset($this->settings->building_name) ? $this->settings->building_name : '';
+        $this->address = isset($this->settings->address) ? $this->settings->address : '';
+        $this->building_number = isset($this->settings->building_number) ? $this->settings->building_number : '';
+        $this->email = isset($this->settings->email) ? $this->settings->email : '';
+        $this->application_logo_path = isset($this->settings->application_logo_path) ? $this->settings->application_logo_path : '';
+        $this->welcome_message = isset($this->settings->welcome_message) ? $this->settings->welcome_message : '';
+        $this->departament_id = isset($this->settings->departament_id) ? $this->settings->departament_id : null;
     }
 
     protected function rules()

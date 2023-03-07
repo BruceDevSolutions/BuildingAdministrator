@@ -13,6 +13,7 @@ use App\Http\Livewire\ExpenseCreateForm;
 use App\Http\Livewire\ExpenseShow;
 use App\Http\Livewire\ExpensesIndex;
 use App\Http\Livewire\ExtraordinaryFeesCreateForm;
+use App\Http\Livewire\ExtraordinaryFeeShow;
 use App\Http\Livewire\ExtraordinaryFeesIndex;
 use App\Http\Livewire\FinesCreateForm;
 use App\Http\Livewire\FineShow;
@@ -62,6 +63,7 @@ Route::get('/properties/fines/{fine}', FineShow::class)->name('properties.fines.
 
 Route::get('/properties/extraordinary-fees', ExtraordinaryFeesIndex::class)->name('properties.extraordinary-fees.index');
 Route::get('/properties/extraordinary-fees/create', ExtraordinaryFeesCreateForm::class)->name('properties.extraordinary-fees.create');
+Route::get('/properties/extraordinary-fees/{extraordinaryFee}', ExtraordinaryFeeShow::class)->name('properties.extraordinary-fees.show');
 
 
 Route::get('/properties', PropertiesIndex::class)->name('properties.index');
