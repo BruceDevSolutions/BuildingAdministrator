@@ -31,9 +31,9 @@
                     <x-forms.input 
                         wire:model="value"
                         label="Monto"
-                        type="Number"
                         placeholder="Ingresa un monto"
                         error-name="value"
+                        type="number"
                         :disabled="$fine_selected || $property_expense_id ?? false"
                     />
         
@@ -104,15 +104,17 @@
                                     <option value="{{ $property->id }}" >{{ $property->code }}</option>
                                 @endforeach
                             </x-forms.select>
+
                             <x-forms.input 
                                 wire:model="paid_up_to"
                                 label="Pagado hasta:"
                                 placeholder="Ingresa el concepto de la deuda"
                                 error-name="paid_up_to"
                                 value="{{ $paid_up_to }}" 
-                                min="{{ $paid_up_to }}" 
+                                min="{{ $min_date }}" 
                                 type="month"
                             />
+                            
                             <x-forms.input 
                                 wire:model="names"
                                 label="Pagado por:"

@@ -42,6 +42,7 @@ class IncomeCreateForm extends Component
     public $new_paid_month;
     public $last_paid;
     public $property;
+    public $min_date;
 
     protected function rules()
     {
@@ -95,6 +96,8 @@ class IncomeCreateForm extends Component
         if($this->property_expense_id){
 
             $this->property = Property::find($this->property_expense_id);
+            
+            $this->min_date = isset($this->property->expenses->last()->pivot) ? Carbon::parse($this->property->expenses->last()->pivot->paid_up_to)->addMonth()->isoFormat('YYYY-MM') : '';
 
             if($this->property){
                 $property_code = $this->property->code;
@@ -119,10 +122,12 @@ class IncomeCreateForm extends Component
             $this->new_paid_month = Carbon::parse($this->paid_up_to)->Format('F Y');
             $this->details = "Pago de expensas del inmueble $property_code correspondiente hasta el mes de $this->new_paid_month";
 
-            $old = Carbon::parse($this->property->paid_up_to);
-            $new = Carbon::parse($this->new_paid_month)->subMonth();
+            if(isset($this->property->expenses->last()->pivot)){ 
+                $old = Carbon::parse($this->property->expenses->last()->pivot->paid_up_to);
+                $new = Carbon::parse($this->paid_up_to);
 
-            $this->value = $this->property->monthly_rate * $old->diffInMonths($new);
+                $this->value = $this->property->monthly_rate * ($old->diffInMonths($new)+1);
+            }
         }
     }
 

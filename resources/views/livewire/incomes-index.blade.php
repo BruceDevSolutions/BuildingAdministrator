@@ -39,7 +39,7 @@
                         </tr>
                     </thead>
                     <tbody class="bg-zinc-100 divide-y dark:divide-gray-700 dark:bg-zinc-800">
-                        @forelse ($incomes as $income)
+                        @forelse ($incomes->where('default', false) as $income)
                         <tr class="text-gray-700 dark:text-gray-400">
                             <td class="px-4 py-3">
                                 {{ $income->id }}
@@ -88,7 +88,7 @@
                         </tr>
                         @empty
                         <tr class="text-gray-700 dark:text-gray-400">
-                            <td colspan="8" class="py-6 text-center">
+                            <td colspan="9" class="py-6 text-center">
                                 Aún no hay registros de gastos.
                             </td>
                         </tr>

@@ -3,9 +3,12 @@
 namespace App\Http\Livewire;
 
 use App\Models\User;
+use App\Models\Income;
 use Livewire\Component;
 use App\Models\Property;
+use Illuminate\Support\Carbon;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
 
 class PropertiesCreateForm extends Component
 {
@@ -15,6 +18,7 @@ class PropertiesCreateForm extends Component
     public $area;
     public $property_type = null;
     public $user_id;
+    public $paid_up_to;
 
     protected function rules()
     {
@@ -37,7 +41,19 @@ class PropertiesCreateForm extends Component
     {
         $validatedData = $this->validate();
 
-        Property::create($validatedData);
+        $property = Property::create($validatedData);
+
+        $income = Income::create([
+            'concept' => 'Ingreso default al crear inmueble',
+            'value' => 0,
+            'date' => now(),
+            'type' => Income::EXPENSA,
+            'user_id' => Auth::user()->id,
+            'default' => true,
+        ]);
+
+        $income->property_expense()
+            ->attach([$property->id => ['names' => $this->code, 'paid_up_to' => Carbon::createFromFormat('Y-m', $this->paid_up_to)]]);
 
         $this->emit('notify-saved');
 

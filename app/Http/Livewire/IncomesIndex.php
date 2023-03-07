@@ -84,11 +84,13 @@ class IncomesIndex extends Component
                 return $query->where('date', 'LIKE', '%'.$this->search.'%')->orWhere('concept', 'LIKE', '%'.$this->search.'%');
             })->orderBy('id','desc')->paginate(5);
         elseif($this->filter_by == 3)
-            $incomes = Income::where('type', Income::EXPENSA)->where(function($query){
+            $incomes = Income::where('default', false)->where('type', Income::EXPENSA)->where(function($query){
                 return $query->where('date', 'LIKE', '%'.$this->search.'%')->orWhere('concept', 'LIKE', '%'.$this->search.'%');
             })->orderBy('id','desc')->paginate(5);
         else{
-            $incomes = Income::where('date', 'LIKE', '%'.$this->search.'%')->orWhere('concept', 'LIKE', '%'.$this->search.'%')->orderBy('id','desc')->paginate(5);
+            $incomes = Income::where('default', false)->where(function($query){
+                return $query->where('date', 'LIKE', '%'.$this->search.'%')->orWhere('concept', 'LIKE', '%'.$this->search.'%');
+            })->orderBy('id','desc')->paginate(5);
         }
 
         return view('livewire.incomes-index', compact('incomes'))->layoutData(['title' => 'Ingresos del inmueble']);

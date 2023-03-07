@@ -27,6 +27,13 @@
             />
 
             <x-forms.input 
+                wire:model="paid_up_to"
+                label="Contar pagos desde:"
+                error-name="paid_up_to"
+                type="month"
+            />
+
+            <x-forms.input 
                 wire:model="area"
                 label="Área del inmuble en metros cuadrados"
                 type="number"
