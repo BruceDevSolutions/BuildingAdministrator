@@ -15,6 +15,7 @@ use App\Http\Livewire\ExpensesIndex;
 use App\Http\Livewire\ExtraordinaryFeesCreateForm;
 use App\Http\Livewire\ExtraordinaryFeeShow;
 use App\Http\Livewire\ExtraordinaryFeesIndex;
+use App\Http\Livewire\FinancesIndex;
 use App\Http\Livewire\FinesCreateForm;
 use App\Http\Livewire\FineShow;
 use App\Http\Livewire\FinesIndex;
@@ -48,6 +49,7 @@ Route::get('announcements/create', AnnouncementsCreateForm::class)->name('announ
 Route::get('announcements/{announcement}/edit', AnnouncementsEditForm::class)->name('announcements.edit');
 
 /* FINANZAS */
+Route::get('finances/', FinancesIndex::class)->name('finances.index');
 Route::get('finances/expenses', ExpensesIndex::class)->name('finances.expenses.index');
 Route::get('finances/expenses/create', ExpenseCreateForm::class)->name('finances.expenses.create');
 Route::get('finances/expenses/{expense}', ExpenseShow::class)->name('finances.expenses.show');
@@ -73,6 +75,8 @@ Route::get('/properties/{property}', PropertyShow::class)->name('properties.show
 
 
 Route::get('/settings', SettingsForm::class)->name('settings');
+
+
 
 Route::middleware([
     'auth:sanctum',
