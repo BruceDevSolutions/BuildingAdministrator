@@ -19,7 +19,7 @@
     @livewireStyles
 </head>
 
-<body>
+<body class="">
 	<div class="flex h-screen bg-zinc-100 dark:bg-zinc-900" :class="{ 'overflow-hidden': isSideMenuOpen }">
         
         <x-app.sidebar />

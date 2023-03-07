@@ -18,7 +18,7 @@ class IncomeSeeder extends Seeder
         $fine1 = Income::create([
             'concept' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit.', 
             'details' => 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Hic nulla velit magnam. Ad dicta voluptatibus repellat quos, aliquid aspernatur unde rem omnis facere possimus adipisci quis. Commodi illum natus quo.',
-            'value' => 400,
+            'value' => 4000,
             'date' => now(),
             'type' => 1,
             'user_id' => 1,
@@ -29,7 +29,7 @@ class IncomeSeeder extends Seeder
         $fine2 = Income::create([
             'concept' => ' Facilis, nisi! Facere quam suscipit.',
             'details' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus blanditiis eum cum hic omnis aspernatur incidunt est ullam, eius magni commodi. Qui consectetur quos exercitationem eligendi quo fugit voluptatum minus!',
-            'value' => 350,
+            'value' => 3500,
             'date' => now(),
             'type' => 1,
             'user_id' => 1,
