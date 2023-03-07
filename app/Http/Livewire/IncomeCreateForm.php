@@ -118,6 +118,11 @@ class IncomeCreateForm extends Component
             $property_code = $this->property->code;
             $this->new_paid_month = Carbon::parse($this->paid_up_to)->Format('F Y');
             $this->details = "Pago de expensas del inmueble $property_code correspondiente hasta el mes de $this->new_paid_month";
+
+            $old = Carbon::parse($this->property->paid_up_to);
+            $new = Carbon::parse($this->new_paid_month)->subMonth();
+
+            $this->value = $this->property->monthly_rate * $old->diffInMonths($new);
         }
     }
 
