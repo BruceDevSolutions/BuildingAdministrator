@@ -19,6 +19,7 @@
                             <th class="px-4 py-3">Nombres</th>
                             <th class="px-4 py-3">CI</th>
                             <th class="px-4 py-3">Email</th>
+                            <th class="px-4 py-3">Rol</th>
                             <th class="px-4 py-3">Contacto</th>
                             <th class="px-4 py-3">Acciones</th>
                         </tr>
@@ -37,6 +38,13 @@
                                 </td>
                                 <td class="px-4 py-3 text-xs">
                                     {{ $user->email }}
+                                </td>
+                                <td class="px-4 py-3 text-xs">
+                                    @if($user->user_type == 1)
+                                        Administrador
+                                    @else
+                                        Propietario
+                                    @endif
                                 </td>
                                 <td class="px-4 py-3 text-sm whitespace-nowrap xl:whitespace-normal">
                                     @forelse ($user->phones as $phone)

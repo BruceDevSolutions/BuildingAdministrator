@@ -27,6 +27,12 @@
                 error-name="ci"
             />
 
+            <x-forms.select error-name="user_type" label="Tipo de usuario" wire:model="user_type">
+                <option value="null" selected disabled >--Selecciona un rol--</option>
+                    <option value="1">Administrador</option>
+                    <option value="2">Usuario</option>
+            </x-forms.select>
+
             <x-forms.select error-name="departament_id" label="Departamento" wire:model="departament_id">
                 <option value="null" selected disabled >--Selecciona un departamento--</option>
                 @foreach ($departaments as $departament)

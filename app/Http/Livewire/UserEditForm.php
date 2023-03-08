@@ -28,6 +28,7 @@ class UserEditForm extends Component
     public $password_confirmation;
     public $phone;
     public $phones = [];
+    public $user_type;
 
     protected function rules()
     {
@@ -35,6 +36,7 @@ class UserEditForm extends Component
             'first_name' => ['required', 'string', 'max:50'],
             'last_name' => ['required', 'string', 'max:50'],
             'ci' => ['required','string','max:12'],
+            'user_type' => ['required'],
             'departament_id' => ['required','integer',Rule::exists('departaments', 'id')],
             'email' => ['required', 'email', 'max:70', Rule::unique('users','email')->ignore($this->user),],
             'password' => ['nullable', 'string', 'confirmed'],
@@ -44,13 +46,14 @@ class UserEditForm extends Component
 
     public function mount()
     {
-        $this->user_object = User::select('id','first_name','last_name','ci','departament_id','email')->where('id',$this->user)->firstOrFail();
+        $this->user_object = User::select('id','first_name','last_name','ci','user_type','departament_id','email')->where('id',$this->user)->firstOrFail();
 
         $this->first_name = $this->user_object->first_name;
         $this->last_name = $this->user_object->last_name;
         $this->ci = $this->user_object->ci;
         $this->departament_id = $this->user_object->departament_id;
         $this->email = $this->user_object->email;
+        $this->user_type = $this->user_object->user_type;
 
         $this->phones = $this->user_object->phones->toArray();
     }

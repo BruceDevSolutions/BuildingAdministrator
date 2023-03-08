@@ -23,6 +23,7 @@ class UsersCreateForm extends Component
     public $password_confirmation;
     public $phone;
     public $phones = [];
+    public $user_type;
 
     protected function rules()
     {
@@ -30,6 +31,7 @@ class UsersCreateForm extends Component
             'first_name' => ['required', 'string', 'max:50'],
             'last_name' => ['required', 'string', 'max:50'],
             'ci' => ['required','string','max:12'],
+            'user_type' => ['required'],
             'departament_id' => ['required','integer',Rule::exists('departaments', 'id')],
             'email' => ['required', 'email', 'max:70', Rule::unique('users','email')],
             'password' => $this->passwordRules(),
