@@ -6,8 +6,9 @@ use App\Models\Fine;
 use App\Models\Income;
 use Livewire\Component;
 use Livewire\WithPagination;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Database\Eloquent\Builder;
 
 class FinesIndex extends Component
 {
@@ -38,11 +39,15 @@ class FinesIndex extends Component
 
     public function changeFineStatus($fine)
     {
+        abort_unless(Gate::allows('cambiar_estado_multa'), 403);
+
         $this->changeStatus = $fine;
     }
 
     public function confirmChangeFineStatus()
     {
+        abort_unless(Gate::allows('cambiar_estado_multa'), 403);
+
         $fine = Fine::findOrFail($this->changeStatus);
 
         if($fine->status){
@@ -85,6 +90,8 @@ class FinesIndex extends Component
 
     public function deleteFine()
     {
+        abort_unless(Gate::allows('eliminar_multa'), 403);
+
         $fine = Fine::findOrFail($this->confirmDelete);
 
         if($fine->date > now()->subMonth(1)){

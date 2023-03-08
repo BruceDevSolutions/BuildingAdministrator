@@ -1,8 +1,10 @@
 <x-card>
     <div class="flex justify-end">
-        <a href="{{ route('finances.incomes.create') }}">
-            <x-button title="Nuevo" />
-        </a>
+        @can('registrar_ingreso')
+            <a href="{{ route('finances.incomes.create') }}">
+                <x-button title="Nuevo" />
+            </a>
+        @endcan
     </div>
 
     <x-title class="mb-4" title="Ingresos del edificio" />
@@ -79,7 +81,9 @@
                             </td>
                             <td class="px-4 py-3">
                                 <div class="flex items-center space-x-4 text-sm">
-                                    <x-delete-button wire:click="confirmDeleteIncome({{ $income->id }})" />
+								    @can('eliminar_ingreso')
+                                        <x-delete-button wire:click="confirmDeleteIncome({{ $income->id }})" />
+                                    @endcan
                                     <a href="{{ route('finances.incomes.show', $income->id) }}">
                                         <x-view-button />
                                     </a>

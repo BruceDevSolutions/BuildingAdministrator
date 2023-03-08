@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\User;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\Gate;
 
 class UsersIndex extends Component
 {
@@ -15,6 +16,8 @@ class UsersIndex extends Component
 
     public function render()
     {
+        abort_unless(Gate::allows('administrar_usuarios'), 403);
+
         $users = User::where('first_name','LIKE', '%'.$this->search.'%')->orWhere('last_name','LIKE', '%'.$this->search.'%')->orderBy('id', 'desc')->paginate(5);
         
         return view('livewire.users-index', compact('users'))->layoutData(['title' => 'Lista de usuarios']);

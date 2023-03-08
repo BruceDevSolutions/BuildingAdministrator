@@ -16,7 +16,7 @@
           
             <x-finance-card title="Locales comerciales" :value="$total_shop_properties" icon-type="house" />
           
-            <x-finance-card title="Usuarios registrados" :value="$total_shop_properties" icon-type="users" />
+            <x-finance-card title="Usuarios registrados" :value="$users_count" icon-type="users" />
     </div>
 
     <x-title title="Deudas de expensas" class="mb-4" />

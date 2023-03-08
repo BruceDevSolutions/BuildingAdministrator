@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Models\Announcement;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Gate;
 
 class AnnouncementsEditForm extends Component
 {
@@ -35,6 +36,8 @@ class AnnouncementsEditForm extends Component
 
     public function render()
     {
+        abort_unless(Gate::allows('administrar_anuncios'), 403);
+
         return view('livewire.announcements-edit-form')->layoutData(['title' => 'Editar anuncio']);
     }
 }

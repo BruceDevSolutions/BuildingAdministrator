@@ -1,8 +1,10 @@
 <x-card>
     <div class="flex justify-end">
-        <a href="{{ route('properties.create') }}">
-            <x-button title="Nuevo" />
-        </a>
+        @can('registrar_inmueble')
+            <a href="{{ route('properties.create') }}">
+                <x-button title="Nuevo" />
+            </a>
+        @endcan
     </div>
 
     <x-title title="Lista de propiedades registradas" class="mb-4"/>
@@ -53,10 +55,15 @@
                                 </td>
                                 <td class="px-2 py-3 w-min">
                                     <div class="flex items-center justify-center space-x-4 text-sm">
-                                        <a href="{{ route('properties.edit', $property) }}">
-                                            <x-edit-button />
-                                        </a>
-                                        <x-delete-button wire:click="confirmDeleteProperty({{ $property->id }})" />
+{{--                                         @can('editar_inmueble')
+                                            <a href="{{ route('properties.edit', $property) }}">
+                                                <x-edit-button />
+                                            </a>
+                                        @endcan --}}
+
+                                        @can('eliminar_inmueble')
+                                            <x-delete-button wire:click="confirmDeleteProperty({{ $property->id }})" />
+                                        @endcan
                                         <a href="{{ route('properties.show', $property) }}">
                                             <x-view-button />
                                         </a>

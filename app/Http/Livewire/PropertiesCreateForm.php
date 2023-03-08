@@ -9,6 +9,7 @@ use App\Models\Property;
 use Illuminate\Support\Carbon;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class PropertiesCreateForm extends Component
 {
@@ -63,6 +64,8 @@ class PropertiesCreateForm extends Component
 
     public function render()
     {
+        abort_unless(Gate::allows('registrar_inmueble'), 403);
+
         $users = User::all();
         
         return view('livewire.properties-create-form', compact('users'))->layoutData(['title' => 'Registrar inmueble']);

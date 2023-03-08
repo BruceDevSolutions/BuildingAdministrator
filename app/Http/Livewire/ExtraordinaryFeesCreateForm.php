@@ -2,11 +2,12 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\ExtraordinaryFee;
 use Livewire\Component;
 use App\Models\Property;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
+use App\Models\ExtraordinaryFee;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class ExtraordinaryFeesCreateForm extends Component
 {
@@ -46,6 +47,7 @@ class ExtraordinaryFeesCreateForm extends Component
 
     public function render()
     {
+        abort_unless(Gate::allows('crear_cuota'), 403);
 
         $properties = Property::all();
 

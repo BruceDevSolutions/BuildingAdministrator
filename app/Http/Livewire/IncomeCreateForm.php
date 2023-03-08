@@ -2,10 +2,10 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Expense;
 use Carbon\Carbon;
 use App\Models\Fine;
 use App\Models\Income;
+use App\Models\Expense;
 use Livewire\Component;
 use App\Models\Property;
 use Livewire\WithFileUploads;
@@ -13,6 +13,7 @@ use Illuminate\Validation\Rule;
 use App\Models\ExtraordinaryFee;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class IncomeCreateForm extends Component
 {
@@ -247,6 +248,8 @@ class IncomeCreateForm extends Component
 
     public function render()
     {
+        abort_unless(Gate::allows('registrar_ingreso'), 403);
+
         $properties = Property::select('id', 'code')->get();
 
         return view('livewire.income-create-form', compact('properties'))->layoutData(['title' => 'Registrar ingreso']);

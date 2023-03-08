@@ -24,6 +24,7 @@ class UserSeeder extends Seeder
             'departament_id' => 4,
             'email' => 'admin@admin.com',
             'password' => Hash::make('admin'),
+            'user_type' => User::ADMINISTRADOR,
         ]);
 
         Phone::create([
@@ -35,6 +36,22 @@ class UserSeeder extends Seeder
         Phone::create([
             'phone' => '98745658',
             'phoneable_id' => $user->id,
+            'phoneable_type' => User::class,
+        ]);
+
+        $user2 = User::create([
+            'first_name' => 'Usuario',
+            'last_name' => 'Propietario',
+            'ci' => '1234567',
+            'departament_id' => 4,
+            'email' => 'propietario@agmail.com',
+            'password' => Hash::make('admin'),
+            'user_type' => User::PROPIETARIO,
+        ]);
+
+        Phone::create([
+            'phone' => '12345678',
+            'phoneable_id' => $user2->id,
             'phoneable_type' => User::class,
         ]);
     }

@@ -1,8 +1,10 @@
 <x-card>
     <div class="flex justify-end">
-        <a href="{{ route('properties.fines.create') }}">
-            <x-button title="Nueva" />
-        </a>
+        @can('crear_multa')
+            <a href="{{ route('properties.fines.create') }}">
+                <x-button title="Nueva" />
+            </a>
+        @endcan
     </div>
     
     <x-title title="Multas"/>
@@ -57,7 +59,11 @@
                                     {{\Carbon\Carbon::parse($fine->created_at)->isoFormat('Y-MM-DD')}}
                                 </td>
                                 <td class="px-4 py-3 text-xs">
-                                    <div class="cursor-pointer" wire:click="changeFineStatus({{ $fine->id }})">
+                                    <div class="cursor-pointer" 
+                                        @can('cambiar_estado_multa')
+                                            wire:click="changeFineStatus({{ $fine->id }})"      
+                                        @endcan 
+                                    >
                                         @if($fine->status)
                                             <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100">
                                                 Pagado
@@ -71,7 +77,10 @@
                                 </td>
                                 <td class="px-4 py-3">
                                     <div class="flex items-center space-x-4 text-sm">
-                                        <x-delete-button wire:click="confirmDeleteFine({{ $fine->id }})" />
+                                        @can('eliminar_multa')
+                                            <x-delete-button wire:click="confirmDeleteFine({{ $fine->id }})"/>
+                                        @endcan
+
                                         <a href="{{ route('properties.fines.show', $fine->id) }}">
                                             <x-view-button />
                                         </a>

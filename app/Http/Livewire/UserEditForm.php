@@ -9,6 +9,7 @@ use App\Models\Departament;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 use App\Actions\Fortify\PasswordValidationRules;
 
@@ -103,6 +104,8 @@ class UserEditForm extends Component
 
     public function render()
     {
+        abort_unless(Gate::allows('administrar_usuarios'), 403);
+
         $departaments = Departament::all();
 
         return view('livewire.user-edit-form', compact('departaments'))->layoutData(['title' => 'Actualizar usuario']);

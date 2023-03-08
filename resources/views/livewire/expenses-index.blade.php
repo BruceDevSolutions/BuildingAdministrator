@@ -1,8 +1,10 @@
 <x-card>
     <div class="flex justify-end">
-        <a href="{{ route('finances.expenses.create') }}">
-            <x-button title="Nuevo" />
-        </a>
+        @can('registrar_egreso')
+            <a href="{{ route('finances.expenses.create') }}">
+                <x-button title="Nuevo" />
+            </a>
+        @endcan
     </div>
     
     <x-title class="mb-4" title="Gastos del edificio"/>
@@ -55,7 +57,9 @@
                                 </td>
                                 <td class="px-4 py-3">
                                     <div class="flex items-center space-x-4 text-sm">
-                                        <x-delete-button wire:click="confirmDeleteExpense({{ $expense->id }})" />
+                                        @can('eliminar_egreso')
+                                            <x-delete-button wire:click="confirmDeleteExpense({{ $expense->id }})" />
+                                        @endcan
                                         <a href="{{ route('finances.expenses.show', $expense->id) }}">
                                             <x-view-button />
                                         </a>

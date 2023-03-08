@@ -1,8 +1,10 @@
 <x-card>
     <div class="flex justify-end">
-        <a href="{{ route('properties.extraordinary-fees.create') }}">
-            <x-button title="Nueva" />
-        </a>
+        @can('crear_cuota')
+            <a href="{{ route('properties.extraordinary-fees.create') }}">
+                <x-button title="Nueva" />
+            </a>
+        @endcan
     </div>
 
     <x-title title="Cuotas extraordinarias" class="mb-4" />
@@ -85,7 +87,9 @@
                                 </td>
                                 <td class="px-4 py-3">
                                     <div class="flex items-center space-x-4 text-sm">
-                                        <x-delete-button wire:click="confirmDeleteFine({{ $fine->id }})" />
+                                        @can('eliminar_cuota')
+                                            <x-delete-button wire:click="confirmDeleteFine({{ $fine->id }})" />
+                                        @endcan
                                         <a href="{{ route('properties.extraordinary-fees.show', $fine->id) }}">
                                             <x-view-button />
                                         </a>

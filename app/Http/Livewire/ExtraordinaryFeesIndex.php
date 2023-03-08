@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\Property;
 use Livewire\WithPagination;
 use App\Models\ExtraordinaryFee;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Database\Eloquent\Builder;
 
 class ExtraordinaryFeesIndex extends Component
@@ -22,6 +23,8 @@ class ExtraordinaryFeesIndex extends Component
 
     public function deleteFine()
     {
+        abort_unless(Gate::allows('eliminar_cuota'), 403);
+
         $fine = ExtraordinaryFee::findOrFail($this->confirmDelete);
 
         if($fine->created_at > now()->subMonth(1)){

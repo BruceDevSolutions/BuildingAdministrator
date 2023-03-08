@@ -2,12 +2,13 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\User;
 use Livewire\Component;
 use App\Models\Departament;
 use Illuminate\Validation\Rule;
-use App\Actions\Fortify\PasswordValidationRules;
-use App\Models\User;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
+use App\Actions\Fortify\PasswordValidationRules;
 
 class UsersCreateForm extends Component
 {
@@ -77,6 +78,8 @@ class UsersCreateForm extends Component
 
     public function render()
     {
+        abort_unless(Gate::allows('administrar_usuarios'), 403);
+
         $departaments = Departament::all();
         
         return view('livewire.users-create-form', compact('departaments'))->layoutData(['title' => 'Registrar usuario']);

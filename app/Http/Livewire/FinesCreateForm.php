@@ -7,6 +7,7 @@ use Livewire\Component;
 use App\Models\Property;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class FinesCreateForm extends Component
 {
@@ -45,6 +46,8 @@ class FinesCreateForm extends Component
 
     public function render()
     {
+        abort_unless(Gate::allows('crear_multa'), 403);
+
         $properties = Property::all();
         
         return view('livewire.fines-create-form', compact('properties'))->layoutData(['title' => 'Crear multa']);

@@ -7,6 +7,7 @@ use Livewire\Component;
 use App\Models\Departament;
 use Livewire\WithFileUploads;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 
 class SettingsForm extends Component
@@ -58,6 +59,8 @@ class SettingsForm extends Component
 
     public function render()
     {
+        abort_unless(Gate::allows('administrar_ajustes'), 403);
+
         $departaments = Departament::all();
 
         return view('livewire.settings-form', compact('departaments'))->layoutData(['title' => 'Ajustes generales']);

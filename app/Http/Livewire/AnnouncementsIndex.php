@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Models\Announcement;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\Gate;
 
 class AnnouncementsIndex extends Component
 {
@@ -15,6 +16,8 @@ class AnnouncementsIndex extends Component
 
     public function render()
     {
+        abort_unless(Gate::allows('administrar_anuncios'), 403);
+
         $announcements = Announcement::where('title','LIKE', '%'.$this->search.'%')->orWhere('description','LIKE', '%'.$this->search.'%')->orderBy('id', 'desc')->paginate(5);
         
         return view('livewire.announcements-index', compact('announcements'))->layoutData(['title' => 'Lista de anuncios']);

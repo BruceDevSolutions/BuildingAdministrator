@@ -4,8 +4,9 @@ namespace App\Http\Livewire;
 
 use App\Models\Expense;
 use Livewire\Component;
-use Illuminate\Support\Facades\Auth;
 use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class ExpenseCreateForm extends Component
 {
@@ -51,6 +52,8 @@ class ExpenseCreateForm extends Component
 
     public function render()
     {
+        abort_unless(Gate::allows('registrar_egreso'), 403);
+
         return view('livewire.expense-create-form')->layoutData(['title' => 'Registrar gasto']);
     }
 }

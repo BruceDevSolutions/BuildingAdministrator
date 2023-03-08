@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Models\Property;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\Gate;
 
 class PropertiesIndex extends Component
 {
@@ -27,6 +28,8 @@ class PropertiesIndex extends Component
 
     public function deleteProperty()
     {
+        abort_unless(Gate::allows('eliminar_inmueble'), 403);
+
         $property = Property::findOrFail($this->confirmDelete);
         $property->delete();
         

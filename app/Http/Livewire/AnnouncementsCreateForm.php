@@ -2,9 +2,10 @@
 
 namespace App\Http\Livewire;
 
+use Livewire\Component;
 use App\Models\Announcement;
 use Illuminate\Validation\Rule;
-use Livewire\Component;
+use Illuminate\Support\Facades\Gate;
 
 class AnnouncementsCreateForm extends Component
 {
@@ -41,6 +42,8 @@ class AnnouncementsCreateForm extends Component
 
     public function render()
     {
+        abort_unless(Gate::allows('administrar_anuncios'), 403);
+
         return view('livewire.announcements-create-form')->layoutData(['title' => 'Crear anuncio']);
     }
 }

@@ -8,6 +8,7 @@ use App\Models\Property;
 use Livewire\WithPagination;
 use App\Models\ExtraordinaryFee;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 
 class IncomesIndex extends Component
@@ -24,6 +25,8 @@ class IncomesIndex extends Component
 
     public function deleteIncome()
     {
+        abort_unless(Gate::allows('eliminar_ingreso'), 403);
+
         $income = Income::findOrFail($this->confirmDelete);
 
         if($income->type == Income::EXPENSA){
