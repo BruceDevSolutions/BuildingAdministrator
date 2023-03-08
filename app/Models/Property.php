@@ -30,6 +30,11 @@ class Property extends Model
         return $this->hasMany(Fine::class);
     }
 
+    public function paid_fines()
+    {
+        return $this->hasMany(Fine::class)->where('status', true);
+    }
+
     public function fines_pendant()
     {
         return $this->hasMany(Fine::class)->where('status', false);

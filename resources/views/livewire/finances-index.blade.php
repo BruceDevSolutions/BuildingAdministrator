@@ -21,6 +21,8 @@
 
     <x-title title="Deudas de expensas" class="mb-4" />
 
+    <x-searcher wire:keydown="cleanPage" wire:model="search"  placeholder="Buscar inmueble por identificador o código"  />
+
     <div class="container grid mx-auto">
         <div class="w-full overflow-hidden rounded-lg ring-1 ring-black ring-opacity-5">
             <div class="w-full overflow-x-auto">
@@ -57,7 +59,7 @@
                                     @endif
                                 </td>
                                 <td class="px-4 py-3 text-sm whitespace-nowrap xl:whitespace-normal">
-                                        {{ isset($property->expenses->last()->pivot)  ? \Carbon\Carbon::parse($property->expenses->last()->pivot->paid_up_to)->Format('F Y') : '--' }}
+                                    {{ isset($property->expenses->last()->pivot)  ? \Carbon\Carbon::parse($property->expenses->last()->pivot->paid_up_to)->Format('F Y') : '--' }}
                                 </td>
                                 <td class="px-4 py-3 text-sm whitespace-nowrap">
                                     {{ isset($property->expenses->last()->pivot)  && $property->expenses->last()->pivot->paid_up_to < now() ? \Carbon\Carbon::parse($property->expenses->last()->pivot->paid_up_to)->diffInMonths(now()) : '--' }} meses.
@@ -67,7 +69,7 @@
                                 </td>
                                 <td class="px-4 py-3">
                                     <div class="flex items-center space-x-4 text-sm">
-                                        <a href="{{ route('finances.expenses.show', $property->id) }}">
+                                        <a href="{{ route('properties.show', $property) }}">
                                             <x-view-button />
                                         </a>
                                     </div>
@@ -88,5 +90,4 @@
             </div>
         </div>
     </div>
-      
 </x-card>

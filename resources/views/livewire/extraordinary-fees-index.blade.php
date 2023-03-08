@@ -44,7 +44,7 @@
                                     {{ $fine->concept }}
                                 </td>
                                 <td class="px-4 py-3 text-sm whitespace-nowrap xl:whitespace-normal">
-                                    {{ Str::limit($fine->details, 150, '...')  }}
+                                    {{ Str::limit($fine->details, 80, '...')  }}
                                 </td>
                                 <td class="px-4 py-3 text-sm whitespace-nowrap">
                                     {{ $fine->value }} Bs.

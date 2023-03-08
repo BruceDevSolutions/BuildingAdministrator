@@ -54,7 +54,7 @@
                     <option value="{{ $user->id }}">{{ $user->first_name }} {{ $user->last_name }}</option>
                 @endforeach
             </x-forms.select>
-            <x-paragraph>Los números de contacto del inmueble se heredarán automáticamente de los números asociados al contacto principal. Si necesitas agregar un contacto extra hazlo desde el panel de administración.</x-paragraph>
+            <x-paragraph>Los números y correo electrónico de contacto del inmueble se heredarán automáticamente de los números asociados al contacto principal. Si necesitas agregar un contacto extra hazlo desde el panel de administración.</x-paragraph>
 
         </div>
         <div class="mt-8 flex justify-end">

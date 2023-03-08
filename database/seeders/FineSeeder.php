@@ -39,7 +39,7 @@ class FineSeeder extends Seeder
             'concept' => 'Daño a áreas públicas III',
             'details' => 'El copropietario dañó la puerta de ingreso al edificio por descuido',
             'value' => 500.00,
-            'status' => 1,
+            'status' => 0,
             'date' => now(),
             'user_id' => 1,
             'property_id' => 1,

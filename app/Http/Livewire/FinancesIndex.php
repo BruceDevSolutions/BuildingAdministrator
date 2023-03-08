@@ -13,6 +13,8 @@ class FinancesIndex extends Component
 {
     use WithPagination;
 
+    public $search;
+
     public function render()
     {
         $total_incomes = DB::table('incomes')
@@ -45,8 +47,11 @@ class FinancesIndex extends Component
 
         $users_count = User::count();
 
-        $properties = Property::paginate(5);
+        $properties = Property::where('code', 'LIKE', '%'.$this->search.'%')->paginate(5);
 
         return view('livewire.finances-index', compact('total_incomes', 'total_properties', 'total_shop_properties', 'total_apartment_properties','amount_available', 'current_month_incomes', 'current_month_expenses', 'users_count', 'properties'))->layoutData(['title' => 'Finanzas']);
+    }
+    public function cleanPage(){
+        $this->resetPage();
     }
 }
