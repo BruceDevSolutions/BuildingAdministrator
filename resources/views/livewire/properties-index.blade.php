@@ -41,7 +41,7 @@
                                     @endforeach
                                 </td>
                                 <td class="px-4 py-3 text-xs">
-                                    Residente de ejemplo
+                                    {{ $property->user->first_name }} {{ $property->user->last_name }}
                                 </td>
                                 <td class="px-4 py-3 text-xs">
                                     {{ $property->monthly_rate }}
